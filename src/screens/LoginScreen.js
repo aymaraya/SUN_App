@@ -13,7 +13,8 @@ import {
 import axios from 'axios';
 
 import { connect } from 'react-redux';
-import { setCurrentUser } from './../actions/setCurrentUser';
+import { loginUser } from './../../store';
+
 import { Button } from 'react-native-elements';
 
 const LoginScreen = (props) => {
@@ -43,7 +44,6 @@ const LoginScreen = (props) => {
             function (response) {
               if (response.data.isAuthenticated == true) {
                 props.navigation.navigate('Profile')
-                props.login({ userData: response.data })
                 console.log(response.data)
               }
               else {
@@ -98,7 +98,7 @@ const LoginScreen = (props) => {
             </Text>
         <TouchableOpacity onPress={() => props.navigation.navigate('Home')}>
           <Text style={{ color: '#d55154', textAlign: 'center' }}>
-            Click here! {props.currentUser}
+            Click here! {props.error}
           </Text>
         </TouchableOpacity>
       </View>
@@ -140,7 +140,7 @@ const LoginScreen = (props) => {
         {
           isLoading ? <ActivityIndicator size="large" style={{ marginTop: 20 }} /> : (
             <Button title="Login" buttonStyle={styles.loginButton}
-              onPress={handleLoginPress}
+              onPress={props.loginUser}
             />
           )
         }
@@ -150,10 +150,19 @@ const LoginScreen = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
+
+//Map the redux state to your props.
+const mapStateToProps = state => {
   return {
-    login: userObject => dispatch(setCurrentUser(userObject))
+    userData: state.userDetails,
+    error: state.errorMessage,
+    loading: state.loading,
   }
+}
+
+//Map your action creators to your props.
+const mapDispatchToProps = {
+  loginUser,
 }
 
 const styles = StyleSheet.create({

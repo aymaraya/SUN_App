@@ -7,9 +7,10 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import { connect } from 'react-redux';
 
 
-export default NotificationScreen = ({ navigation }) => {
+const NotificationScreen = (props) => {
 
   const [isLoading, setLoading] = useState(true);
   const [schedule, setSchedule] = useState();
@@ -38,12 +39,19 @@ export default NotificationScreen = ({ navigation }) => {
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.body}>
           <Text style={{ fontSize: 32, fontWeight: "bold" }}>Notifications </Text>
-
+          {console.log(props.currentUser)}
         </ScrollView>
       </SafeAreaView>
     </SafeAreaProvider>
   )
 }
+
+const mapStateToProps = state => {
+  return {
+    currentUser: state.userDetails
+  }
+}
+
 
 const styles = StyleSheet.create({
   container: {
@@ -54,5 +62,6 @@ const styles = StyleSheet.create({
   body: {
     flex: 1
   }
-
 })
+
+export default connect(mapStateToProps)(NotificationScreen)

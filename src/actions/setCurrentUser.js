@@ -1,5 +1,5 @@
-export const setCurrentUser = userObject => {
+export const setCurrentUser = userDetails => {
   return dispatch => {
-    dispatch({type: 'LOGIN_USER', payload: userObject})
+    dispatch({type: 'LOGIN_USER', payload: userDetails})
   }
 }

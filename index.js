@@ -1,23 +1,9 @@
 import React from 'react';
 import App from './App.js';
-import { Provider } from 'react-redux';
 import { registerRootComponent } from 'expo';
 
-import thunk from 'redux-thunk'
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
-
-const userReducer = (state = {}, action) => {
-  if (action.type === 'LOGIN_USER') {
-    return (action.payload)
-  }
-  return state
-}
-
-const reducer = combineReducers({
-  userReducer
-})
-
-const store = createStore(reducer, applyMiddleware(thunk))
+import { Provider } from 'react-redux';
+import store from './store'
 
 const NewRootComponent = () => {
   return (
@@ -27,4 +13,3 @@ const NewRootComponent = () => {
   )
 }
 export default registerRootComponent(NewRootComponent);
-
