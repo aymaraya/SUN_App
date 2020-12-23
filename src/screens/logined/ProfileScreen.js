@@ -11,17 +11,15 @@ import {
 import Menu from './../../components/Menu';
 import LogoutButton from './../../components/LogoutButton';
 
+import { connect } from 'react-redux';
 
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 
-import {
-  Icon
-} from 'react-native-elements'
 import axios from 'axios';
 
-export default ProfileScreen = ({ navigation }) => {
+const ProfileScreen = (props) => {
 
-  const studentId = navigation.getParam('id');
+  const studentId = props.navigation.getParam('id');
 
   const [isLoading, setLoading] = useState(true);
   const [studentData, setStudentData] = useState();
@@ -45,6 +43,7 @@ export default ProfileScreen = ({ navigation }) => {
 
   return (
     <SafeAreaProvider>
+
       <SafeAreaView style={styles.container}>
         <View style={{ backgroundColor: '#4630EB', padding: 30 }}>
 
@@ -54,6 +53,7 @@ export default ProfileScreen = ({ navigation }) => {
             <View style={styles.detailsContainer}>
               <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}> Miss. FADHILA MAHDI JIBIR </Text>
               <Text style={{ color: '#f2f2f2' }}> CSC - BC. COMPUTER SCIENCE  </Text>
+              <Text> {props.currentUser} </Text>
             </View>
 
           </View>
@@ -85,15 +85,23 @@ export default ProfileScreen = ({ navigation }) => {
             text='CDP Manual'
             to="Test" />
           <LogoutButton
-            color1='#fe4843' 
-            color2='#db0a6c' 
-            text='Logout' 
-            to="Login"/>
+            color1='#fe4843'
+            color2='#db0a6c'
+            text='Logout'
+            to="Login" />
+
         </View>
+        {console.log(props.currentUser)}
 
       </SafeAreaView>
     </SafeAreaProvider>
   )
+}
+
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser
+  }
 }
 
 const styles = StyleSheet.create({
@@ -124,3 +132,5 @@ const styles = StyleSheet.create({
     alignContent: 'flex-start',
   }
 })
+
+export default connect(mapStateToProps)(ProfileScreen)

@@ -10,20 +10,18 @@ import {
   TextInput,
   Alert
 } from 'react-native';
-import axios from 'axios'
+import axios from 'axios';
+
+import { connect } from 'react-redux';
+import { setCurrentUser } from './../actions/setCurrentUser';
 import { Button } from 'react-native-elements';
 
-export default LoginScreen = ({ navigation }) => {
+const LoginScreen = (props) => {
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [isLoading, setLoading] = useState(false);
-
-
-  const loginUser = async () => {
+  const handleLoginPress = async () => {
     try {
       if (username == '' || password == '') {
-        Alert.alert('Error','Please input your login details')
+        Alert.alert('Error', 'Please input your login details')
       }
       else {
         setLoading(true);
@@ -44,8 +42,9 @@ export default LoginScreen = ({ navigation }) => {
           .then(
             function (response) {
               if (response.data.isAuthenticated == true) {
-                console.log(response.data);
-                navigation.navigate('Profile', { id: response.data.studentId, token: response.data.token })
+                props.navigation.navigate('Profile')
+                props.login({ userData: response.data })
+                console.log(response.data)
               }
               else {
                 Alert.alert('Error', 'Something went wrong, please try again!');
@@ -58,11 +57,16 @@ export default LoginScreen = ({ navigation }) => {
     catch (error) {
       console.log(error)
     }
-  };
+  }
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setLoading] = useState(false);
 
 
   return (
     <View style={styles.container}>
+
 
       <View style={{ marginTop: 10 }}>
         <Image
@@ -74,7 +78,7 @@ export default LoginScreen = ({ navigation }) => {
 
       <View style={{ flexDirection: 'column' }}>
         <Button title="Apply Now" buttonStyle={styles.applyButton}
-          onPress={() => navigation.navigate('Admission')} />
+          onPress={() => props.navigation.navigate('Admission')} />
         <View style={{ flexDirection: 'row', marginTop: 10 }}>
           <View style={[styles.inputContainer, styles.refNoInput]}>
             <TextInput
@@ -84,7 +88,7 @@ export default LoginScreen = ({ navigation }) => {
             />
           </View>
           <Button title="Check Status" buttonStyle={styles.statusButton}
-            onPress={() => navigation.navigate('CheckStatus')} />
+            onPress={() => props.navigation.navigate('CheckStatus')} />
         </View>
       </View>
 
@@ -92,12 +96,13 @@ export default LoginScreen = ({ navigation }) => {
         <Text style={{ textAlign: 'center' }}>
           Are you a Visitor?
             </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+        <TouchableOpacity onPress={() => props.navigation.navigate('Home')}>
           <Text style={{ color: '#d55154', textAlign: 'center' }}>
-            Click here!
+            Click here! {props.currentUser}
           </Text>
         </TouchableOpacity>
       </View>
+
 
       <KeyboardAvoidingView behavior="height" style={{ marginBottom: 20 }}>
 
@@ -135,17 +140,22 @@ export default LoginScreen = ({ navigation }) => {
         {
           isLoading ? <ActivityIndicator size="large" style={{ marginTop: 20 }} /> : (
             <Button title="Login" buttonStyle={styles.loginButton}
-              onPress={() => loginUser()}
+              onPress={handleLoginPress}
             />
           )
         }
 
-
       </KeyboardAvoidingView>
     </View>
   );
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: userObject => dispatch(setCurrentUser(userObject))
+  }
 }
-  ;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -184,3 +194,5 @@ const styles = StyleSheet.create({
     marginBottom: 15
   },
 });
+
+export default connect(null, mapDispatchToProps)(LoginScreen)
