@@ -18,11 +18,10 @@ export const loginUser = () => {
 
     try {
       dispatch(loginPending(true));
-      console.log('1')
       await axios({
-        method: 'get',
-        url: 'https://api.sun.edu.ng/api/student-detail/1113/studentId',
-        data: { studentId : 1113 },
+        method: 'post',
+        url: 'https://api.sun.edu.ng/api/login/authenticate',
+        data: { username: '1113', password: '1113@Sky123' },
         
       })
         .then(response => {

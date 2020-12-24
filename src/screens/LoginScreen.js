@@ -10,7 +10,6 @@ import {
   TextInput,
   Alert
 } from 'react-native';
-import axios from 'axios';
 
 import { connect } from 'react-redux';
 import { loginUser } from './../../store';
@@ -19,50 +18,21 @@ import { Button } from 'react-native-elements';
 
 const LoginScreen = (props) => {
 
-  const handleLoginPress = async () => {
-    try {
-      if (username == '' || password == '') {
-        Alert.alert('Error', 'Please input your login details')
-      }
-      else {
-        setLoading(true);
-        await axios(
-          {
-            method: 'POST',
-            url: 'https://api.sun.edu.ng/api/login/authenticate',
-            data: {
-              'username': username,
-              'password': password
-            },
-            headers: {
-              Accept: 'application/json',
-              Authorization: 'Bearer DA7uzz4i5bEjHhQ5kCte5Dbajhd40OX8hwW-sW5xNZGtCGbikDSTQ2AmP1I8E1vu4UM2GWN_vR3lDW5_yfZmaICLD1-v5MQPQqHnj_G_AXlFCU9mdWIeLFwo0u3MXnYx'
-            }
-          }
-        )
-          .then(
-            function (response) {
-              if (response.data.isAuthenticated == true) {
-                props.navigation.navigate('Profile')
-                console.log(response.data)
-              }
-              else {
-                Alert.alert('Error', 'Something went wrong, please try again!');
-                setLoading(false)
-              }
-            }
-          )
-      }
-    }
-    catch (error) {
-      console.log(error)
-    }
-  }
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoading, setLoading] = useState(false);
 
+  const handleLoginPress = () => {
+    if (username == '' || password == '') {
+      Alert.alert('Error', 'Please input your login details')
+    }
+    else {
+      props.loginUser({ username: '1113', password: '1113@Sky' })
+      if(!props.loading) {
+        props.navigation.navigate('Profile')
+      }
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -138,9 +108,9 @@ const LoginScreen = (props) => {
           />
         </View>
         {
-          isLoading ? <ActivityIndicator size="large" style={{ marginTop: 20 }} /> : (
+          props.loading ? <ActivityIndicator size="large" style={{ marginTop: 20 }} /> : (
             <Button title="Login" buttonStyle={styles.loginButton}
-              onPress={props.loginUser}
+              onPress={handleLoginPress}
             />
           )
         }
@@ -152,17 +122,14 @@ const LoginScreen = (props) => {
 
 
 //Map the redux state to your props.
-const mapStateToProps = state => {
-  return {
-    userData: state.userDetails,
-    error: state.errorMessage,
-    loading: state.loading,
-  }
-}
+const mapStateToProps = state => ({
+  loading: state.loading,
+  error: state.errorMessage
+})
 
 //Map your action creators to your props.
 const mapDispatchToProps = {
-  loginUser,
+  loginUser
 }
 
 const styles = StyleSheet.create({
@@ -204,4 +171,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, mapDispatchToProps)(LoginScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
