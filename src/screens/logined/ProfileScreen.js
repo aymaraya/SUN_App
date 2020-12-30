@@ -7,11 +7,11 @@ import {
   TouchableOpacity,
   ActivityIndicator
 } from 'react-native';
+import { connect } from 'react-redux';
+
 
 import Menu from './../../components/Menu';
 import LogoutButton from './../../components/LogoutButton';
-
-import { connect } from 'react-redux';
 
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 
@@ -20,26 +20,6 @@ import axios from 'axios';
 const ProfileScreen = (props) => {
 
   const studentId = props.navigation.getParam('id');
-
-  const [isLoading, setLoading] = useState(true);
-  const [studentData, setStudentData] = useState();
-
-  const url = `http://api.sun.edu.ng/api/student-detail/${studentId}/studentId `
-
-  useEffect(() => {
-    const getStudentData = async () => {
-      try {
-        const result = await axios.get(
-          url
-        );
-        setStudentData(result.data);
-        setLoading(false);
-      } catch (error) {
-      }
-    };
-    getStudentData();
-  }, []);
-
 
   return (
     <SafeAreaProvider>
@@ -51,9 +31,9 @@ const ProfileScreen = (props) => {
 
             <Image source={require('../../../assets/images/person.jpg')} style={styles.thumbnail} />
             <View style={styles.detailsContainer}>
-              <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}> Miss. FADHILA MAHDI JIBIR </Text>
-              <Text style={{ color: '#f2f2f2' }}> CSC - BC. COMPUTER SCIENCE  </Text>
-              <Text> {props.currentUser} </Text>
+              <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}> {props.user.studentName} </Text>
+              <Text style={{ fontSize: 15, color: '#f2f2f2', textAlign: 'center' }}> {props.user.course}  </Text>
+              <Text style={{ color: '#f2f2f2' }}> {props.user.termName} </Text>
             </View>
 
           </View>
@@ -98,11 +78,10 @@ const ProfileScreen = (props) => {
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    currentUser: state.currentUser
-  }
-}
+const mapStateToProps = state => ({
+  user: state.userDetails.studentDetail,
+  error: state.errorMessage
+})
 
 const styles = StyleSheet.create({
   container: {

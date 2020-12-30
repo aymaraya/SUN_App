@@ -11,7 +11,7 @@ import axios from 'axios';
 
 const store = createStore(reducer, applyMiddleware(thunk))
 
-//Define your action creators that will be responsible for asynchronouse operatiosn 
+//Define your action creators that will be responsible for asynchronous operation 
 export const loginUser = () => {
   //IN order to use await your callback must be asynchronous using async keyword.
   return async dispatch => {

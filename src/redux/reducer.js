@@ -3,7 +3,7 @@ const initialState = {
   //Have a people array responsible for getting the data and setting to the array.
   userDetails: {},
   //Have the loading state indicate if it's done getting data.
-  loading: true,
+  loading: false,
   //Have state for error message for recieving an error.
   errorMessage: 'no',
 }
