@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
 } from 'react-native';
 
 import { WebView } from 'react-native-webview';
+
+import { Header, Icon } from 'react-native-elements';
 
 import {
   Container,

@@ -11,8 +11,7 @@ import MapScreen from '../screens/MapScreen';
 import AboutScreen from '../screens/AboutScreen';
 import CheckStatus from '../screens/subscreens/CheckStatus';
 import TestScreen from '../screens/TestScreen';
-import TourScreen from '../screens/TourScreen';
-
+import SoonScreen from '../screens/SoonScreen';
 
 const VisitorScreens = createStackNavigator({
   Home: HomeScreen,
@@ -22,7 +21,7 @@ const VisitorScreens = createStackNavigator({
   News: NewScreen,
   About: AboutScreen,
   CheckStatus: CheckStatus,
-  Tour: TourScreen,
+  Soon: SoonScreen,
   Test: TestScreen
 },
   {

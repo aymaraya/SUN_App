@@ -15,9 +15,11 @@ import LogoutButton from './../../components/LogoutButton';
 
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 
+import axios from 'axios';
 
 const ProfileScreen = (props) => {
 
+  const studentId = props.navigation.getParam('id');
 
   return (
     <SafeAreaProvider>
@@ -29,9 +31,9 @@ const ProfileScreen = (props) => {
 
             <Image source={require('../../../assets/images/person.jpg')} style={styles.thumbnail} />
             <View style={styles.detailsContainer}>
-              <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}> FADHILA HASSAN UMAR </Text>
-              <Text style={{ fontSize: 15, color: '#f2f2f2', textAlign: 'center' }}> B.Sc Computer Science  </Text>
-              <Text style={{ color: '#f2f2f2' }}>  </Text>
+              <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}> {props.user.studentName} </Text>
+              <Text style={{ fontSize: 15, color: '#f2f2f2', textAlign: 'center' }}> {props.user.course}  </Text>
+              <Text style={{ color: '#f2f2f2' }}> {props.user.termName} </Text>
             </View>
 
           </View>
@@ -77,6 +79,7 @@ const ProfileScreen = (props) => {
 }
 
 const mapStateToProps = state => ({
+  user: state.userDetails.studentDetail,
   error: state.errorMessage
 })
 
