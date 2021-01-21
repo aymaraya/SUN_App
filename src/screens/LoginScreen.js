@@ -18,9 +18,11 @@ import { Button } from 'react-native-elements';
 
 const LoginScreen = (props) => {
 
+  const [hideView, setHideView] = useState(false);
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
 
   const handleLoginPress = () => {
     if (username == '' || password == '') {
@@ -28,9 +30,6 @@ const LoginScreen = (props) => {
     }
     else {
       props.loginUser({ username: '1113', password: '1113@Sky' })
-      if(!props.loading) {
-        props.navigation.navigate('Profile')
-      }
     }
   }
 
@@ -45,6 +44,7 @@ const LoginScreen = (props) => {
           resizeMode='contain'
         />
       </View>
+
 
       <View style={{ flexDirection: 'column' }}>
         <Button title="Apply Now" buttonStyle={styles.applyButton}
@@ -68,13 +68,13 @@ const LoginScreen = (props) => {
             </Text>
         <TouchableOpacity onPress={() => props.navigation.navigate('Home')}>
           <Text style={{ color: '#d55154', textAlign: 'center' }}>
-            Click here! {props.error}
+            Click here! 
           </Text>
         </TouchableOpacity>
       </View>
 
 
-      <KeyboardAvoidingView behavior="height" style={{ marginBottom: 20 }}>
+      <KeyboardAvoidingView  style={{ marginBottom: 20 }}>
 
         <View style={[styles.inputContainer, styles.loginInput]}>
           <TextInput
@@ -123,6 +123,7 @@ const LoginScreen = (props) => {
 
 //Map the redux state to your props.
 const mapStateToProps = state => ({
+  studentDetail: state.studentDetail,
   loading: state.loading,
   error: state.errorMessage
 })

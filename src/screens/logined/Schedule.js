@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import axios from 'axios';
 
 
 export default ScheduleScreen = ({ navigation }) => {
@@ -15,21 +16,26 @@ export default ScheduleScreen = ({ navigation }) => {
   const [schedule, setSchedule] = useState();
 
   useEffect(() => {
-    const getSchedule = async () => {
+    async () => {
       try {
-
-        const result = await axios.get(
-          'http://api.sun.edu.ng:6060/api/class-schedule/1113/studentId'
-        );
-
-        setSchedule(result.data);
-
-        setLoading(false);
-
-      } catch (error) {
+        await axios({
+          method: 'GET',
+          url: 'https://api.sun.edu.ng/api/class-schedule/1113/studentId'
+        })
+          .then(response => {
+            setSchedule(response.data)
+            console.log(response.data)
+          }
+          )
+          .catch(err => {
+            console.log(err)
+          })
       }
-    };
-    getSchedule();
+      catch (error) {
+        console.log(error)
+      }
+    }
+
   }, []);
 
 
@@ -42,7 +48,7 @@ export default ScheduleScreen = ({ navigation }) => {
 
           <View style={{ marginTop: 24 }}>
 
-            <View style={{ backgroundColor: '#004987', marginBottom: 14,padding: 14, borderRadius: 8 }}>
+            <View style={{ backgroundColor: '#004987', marginBottom: 14, padding: 14, borderRadius: 8 }}>
               <Text style={{ fontSize: 16, marginBottom: 5, color: 'white' }}>
                 MON
               </Text>
@@ -124,7 +130,7 @@ export default ScheduleScreen = ({ navigation }) => {
               <Text style={{ color: '#f6f6f6' }}>
                 * MR.KABIRU [15:00-16:00] - GST1213-[C-9]
               </Text>
-            </View> 
+            </View>
 
           </View>
 

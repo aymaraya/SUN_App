@@ -60,7 +60,7 @@ export default HomeScreen = ({ navigation }) => {
           color2='#003067'             
           iconSrc={require('../../assets/images/menu/tour.png')}
           text='Virtual Tour'
-          to="Soon"
+          to="Tour"
         />
         <Menu 
           color1='#fe4843' 

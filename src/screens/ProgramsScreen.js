@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
+  StyleSheet
 } from 'react-native';
 
 import { WebView } from 'react-native-webview';
-
-import { Header, Icon } from 'react-native-elements';
 
 import {
   Container,

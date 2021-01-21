@@ -3,10 +3,7 @@ import {
   View,
   StyleSheet,
   Text,
-  TouchableOpacity,
 } from 'react-native';
-
-import { Header, Icon } from 'react-native-elements';
 
 import {
   Container,
@@ -17,44 +14,18 @@ import {
 import Procedure from './subscreens/Procedure';
 import Requirements from './subscreens/Requirements';
 import Application from './subscreens/Application';
+import HomeHeader from '../components/HomeHeader';
 
 export default AdmissionScreen = ({navigation}) => {
   return (
     <Container>
-      <Header
-        barStyle="light-content"
-        leftComponent={
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Icon
-                name='chevron-left'
-                color='#007AFF'
-                size={28}
-              />
-              <Text style={{ color: '#007AFF' }}>
-                Home
-                </Text>
-            </View>
-          </TouchableOpacity>
-        }
-        rightComponent={{ icon: 'share', color: '#007AFF', size: 18, marginRight: 15 }}
-        containerStyle={{
-          backgroundColor: '#eee',
-          justifyContent: 'space-around',
-        }}
-      />
-      <View style={styles.titleBar}>
-        <Text style={{ fontSize: 22, fontWeight: 'bold' }}>
-          Admissions
-          </Text>
-      </View>
+      <HomeHeader />
       <Tabs tabBarUnderlineStyle={{ backgroundColor: '#007AFF' }}>
         <Tab heading="Procedures"
           tabStyle={{ backgroundColor: '#fff' }}
           textStyle={{ color: 'black' }}
           activeTabStyle={{ backgroundColor: '#fff' }}
           activeTextStyle={{ color: 'black', fontWeight: 'normal' }}>
-
           <Procedure />
         </Tab>
 
