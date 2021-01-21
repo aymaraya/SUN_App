@@ -28,9 +28,6 @@ const LoginScreen = (props) => {
     }
     else {
       props.loginUser({ username: '1113', password: '1113@Sky' })
-      if(!props.loading) {
-        props.navigation.navigate('Profile')
-      }
     }
   }
 

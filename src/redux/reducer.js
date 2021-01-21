@@ -4,6 +4,8 @@ const initialState = {
   userDetails: {},
   //Have the loading state indicate if it's done getting data.
   loading: false,
+  //Have the loading state indicate if the user is authenticated.
+  isAuthenticated: false,
   //Have state for error message for recieving an error.
   errorMessage: 'no',
 }
@@ -15,7 +17,7 @@ const reducer = (state = initialState, action) => {
     case 'LOGIN_PENDING':
       return { ...state, loading: action.payload };
     case 'LOGIN_SUCCESSFUL':
-      return { ...state, userDetails: action.payload, loading: action.loading };
+      return { ...state, userDetails: action.payload, loading: action.loading, isAuthenticated: action.isAuthenticated };
     case 'LOGIN_FAILED':
       return { ...state, errorMessage: action.payload, loading: action.loading };
     default:

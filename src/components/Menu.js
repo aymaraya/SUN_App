@@ -6,12 +6,12 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { useNavigation } from '@react-navigation/native'
 
 import { LinearGradient } from 'expo-linear-gradient';
 
-const Menu = ({color1, color2, iconSrc, text, onPress, navigation, to}) => {
-
+const Menu = ({color1, color2, iconSrc, text,  to}) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigation.navigate(to)}>
@@ -60,4 +60,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withNavigation(Menu);
+export default Menu;

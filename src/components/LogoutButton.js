@@ -6,12 +6,12 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { useNavigation } from '@react-navigation/native'
+
 
 import { LinearGradient } from 'expo-linear-gradient';
-
-const LogoutButton = ({color1, color2, iconSrc, text, onPress, navigation, to}) => {
-
+const LogoutButton = ({ color1, color2, iconSrc, text, onPress, to }) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigation.navigate(to)}>
@@ -20,7 +20,7 @@ const LogoutButton = ({color1, color2, iconSrc, text, onPress, navigation, to}) 
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={styles.bg}>
-          
+
           <Text style={styles.text}>
             {text}
           </Text>
@@ -42,18 +42,18 @@ const styles = StyleSheet.create({
     height: '80%',
     width: '60%'
   },
-  text: { 
-    color: 'white', 
+  text: {
+    color: 'white',
     textAlign: 'center',
-    marginTop: 8 
+    marginTop: 8
   },
   bg: {
-    borderRadius: 8, 
+    borderRadius: 8,
     padding: 15,
-    width: '100%', 
+    width: '100%',
     height: '100%',
     justifyContent: 'center',
   }
 });
 
-export default withNavigation(LogoutButton);
+export default LogoutButton;

@@ -5,14 +5,13 @@ import {
   TouchableOpacity,
   Text
 } from 'react-native';
-import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaView} from 'react-native-safe-area-context';
 import HomeHeader from './../components/HomeHeader'
 import { WebView } from 'react-native-webview';
 
 export default AboutScreen = ({ navigation }) => {
 
   return (
-    <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <HomeHeader />
         <View style={styles.contentContainer}>
@@ -22,7 +21,6 @@ export default AboutScreen = ({ navigation }) => {
           />
         </View>
       </SafeAreaView>
-    </SafeAreaProvider>
   )
 }
 

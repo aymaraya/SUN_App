@@ -19,7 +19,6 @@ import axios from 'axios';
 
 const ProfileScreen = (props) => {
 
-  const studentId = props.navigation.getParam('id');
 
   return (
     <SafeAreaProvider>
@@ -31,9 +30,9 @@ const ProfileScreen = (props) => {
 
             <Image source={require('../../../assets/images/person.jpg')} style={styles.thumbnail} />
             <View style={styles.detailsContainer}>
-              <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}> {props.user.studentName} </Text>
-              <Text style={{ fontSize: 15, color: '#f2f2f2', textAlign: 'center' }}> {props.user.course}  </Text>
-              <Text style={{ color: '#f2f2f2' }}> {props.user.termName} </Text>
+              <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white', textAlign: 'center' }}> {props.user.studentDetail.dept} </Text>
+              <Text style={{ fontSize: 15, color: '#f2f2f2', textAlign: 'center' }}> {props.user.studentDetail.degreeType}  </Text>
+              <Text style={{ color: '#f2f2f2' }}>  </Text>
             </View>
 
           </View>
@@ -67,8 +66,7 @@ const ProfileScreen = (props) => {
           <LogoutButton
             color1='#fe4843'
             color2='#db0a6c'
-            text='Logout'
-            to="Login" />
+            text='Logout' />
 
         </View>
         {console.log(props.currentUser)}
@@ -79,7 +77,7 @@ const ProfileScreen = (props) => {
 }
 
 const mapStateToProps = state => ({
-  user: state.userDetails.studentDetail,
+  user: state.userDetails,
   error: state.errorMessage
 })
 

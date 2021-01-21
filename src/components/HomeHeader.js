@@ -6,13 +6,13 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { useNavigation } from '@react-navigation/native'
 import { Icon } from 'react-native-elements';
-const HomeHeader = ({ navigation }) => {
-
+const HomeHeader = ({ Home }) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Icon
             name='chevron-left'
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default withNavigation(HomeHeader);
+export default HomeHeader;

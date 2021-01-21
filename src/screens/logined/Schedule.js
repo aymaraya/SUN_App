@@ -9,7 +9,7 @@ import {
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 
 
-export default ScheduleScreen = ({ navigation }) => {
+export default ScheduleScreen = () => {
 
   const [isLoading, setLoading] = useState(true);
   const [schedule, setSchedule] = useState();

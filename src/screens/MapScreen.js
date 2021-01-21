@@ -12,10 +12,9 @@ import { MapView } from 'expo';
 
 export default MapScreen = ({ navigation }) => {
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        <HomeHeader />
-        {/**<MapView
+    <SafeAreaView style={styles.container}>
+      <HomeHeader />
+      {/**<MapView
         style={{ flex: 1, width, height }}
         showUserLocation
         initialRegion={{
@@ -34,8 +33,7 @@ export default MapScreen = ({ navigation }) => {
           description={"University in Kano"}
         />
         </MapView>**/}
-      </SafeAreaView>
-    </SafeAreaProvider>
+    </SafeAreaView>
   );
 }
 

@@ -1,7 +1,7 @@
 import React from "react";
 import {
   createBottomTabNavigator
-} from 'react-navigation';
+} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import ScheduleScreen from '../screens/logined/Schedule';
@@ -9,37 +9,40 @@ import AttendanceScreen from '../screens/logined/Attendance';
 import NotificationScreen from '../screens/logined/Notification';
 import ProfileScreen from '../screens/logined/ProfileScreen';
 
-export default createBottomTabNavigator({
-  Schedule: ScheduleScreen,
-  Attendance: AttendanceScreen,
-  Notification: NotificationScreen,
-  Profile: ProfileScreen
-},
-  {
-    initialRouteName: "Profile",
-    defaultNavigationOptions: ({ navigation }) => ({
-      
-      tabBarIcon: ({ focused, horizontal, tintColor }) => {
-        const { routeName } = navigation.state;
-        let IconComponent = Ionicons;
-        let iconName;
-        if (routeName === 'Schedule') {
-          iconName = `ios-calendar`;
-        } else if (routeName === 'Attendance') {
-          iconName = `ios-checkmark-circle`;
-        } else if (routeName === 'Notification') {
-          iconName = `ios-notifications`;
-        } else {
-          iconName = `md-person`;
-        }
-        // You can return any component that you like here!
-        return <IconComponent name={iconName} size={25} color={tintColor} />;
-      },
-    }),
+const Tab = createBottomTabNavigator();
 
-    tabBarOptions: {
-      activeTintColor: 'blue',
-      inactiveTintColor: 'gray',
-    }
-  }
-)
+const StudentScreens = () => {
+  return (
+    <Tab.Navigator 
+      initialRouteName="Profile"
+      screenOptions= {({ route }) => ({
+        tabBarIcon: ({ focused, size, color }) => {
+          let IconComponent = Ionicons;
+          let iconName;
+          if (route.name === 'Schedule') {
+            iconName = `ios-calendar`;
+          } else if (route.name === 'Attendance') {
+            iconName = `ios-checkmark-circle`;
+          } else if (route.name === 'Notification') {
+            iconName = `ios-notifications`;
+          } else {
+            iconName = `md-person`;
+          }
+          // You can return any component that you like here!
+          return <IconComponent name={iconName} size={25} color={color} />;
+        }
+      })}
+      tabBarIcon={{
+        activeTintColor: 'blue',
+        inactiveTintColor: 'gray'
+      }}
+      >
+      <Tab.Screen name="Schedule" component={ScheduleScreen} />
+      <Tab.Screen name="Attendance" component={AttendanceScreen} />
+      <Tab.Screen name="Notification" component={NotificationScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+    </Tab.Navigator>
+  )
+}
+
+export default StudentScreens;

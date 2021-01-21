@@ -5,5 +5,6 @@ export const loginSuccessful = (data) => {
       type: 'LOGIN_SUCCESSFUL',
       payload: data,
       loading: false,
+      isAuthenticated: true
   };
 }

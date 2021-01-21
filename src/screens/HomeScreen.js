@@ -6,12 +6,13 @@ import {
   Text,
   Image
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Menu from '../components/Menu';
 
 export default HomeScreen = ({ navigation }) => {
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }}>
 
       <Image
         source={require('../../assets/images/logo_col.png')}
@@ -60,7 +61,7 @@ export default HomeScreen = ({ navigation }) => {
           color2='#003067'             
           iconSrc={require('../../assets/images/menu/tour.png')}
           text='Virtual Tour'
-          to="Soon"
+          to="Tour"
         />
         <Menu 
           color1='#fe4843' 
@@ -77,7 +78,7 @@ export default HomeScreen = ({ navigation }) => {
           to='Login'
         />
       </View> 
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
   logo: {
     width: '60%',
     alignSelf: 'center',
-    marginTop: 14
+    marginTop: 6
   },
 
   menuContainer: {
