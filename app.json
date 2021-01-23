@@ -15,6 +15,7 @@
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
+    "scheme": "skyline",
     "updates": {
       "fallbackToCacheTimeout": 0
     },

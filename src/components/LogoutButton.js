@@ -14,7 +14,7 @@ const LogoutButton = ({ color1, color2, iconSrc, text, onPress, to }) => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate(to)}>
+      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
         <LinearGradient
           colors={[color1, color2]}
           start={{ x: 0, y: 0 }}

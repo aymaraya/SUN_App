@@ -11,15 +11,15 @@ import { connect } from 'react-redux';
 
 
 import Menu from './../../components/Menu';
-import LogoutButton from './../../components/LogoutButton';
-
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 
-import axios from 'axios';
 
 const ProfileScreen = (props) => {
+  const image = 'data:image/png;base64,'
 
-
+  const handleLogOutPress = () => {
+    
+  }
   return (
     <SafeAreaProvider>
 
@@ -28,11 +28,13 @@ const ProfileScreen = (props) => {
 
           <View style={styles.profileContainer}>
 
-            <Image source={require('../../../assets/images/person.jpg')} style={styles.thumbnail} />
+            <Image source={{ uri: image + props.user.studentDetail.photo }} style={styles.thumbnail} />
             <View style={styles.detailsContainer}>
               <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white', textAlign: 'center' }}> {props.user.studentDetail.dept} </Text>
               <Text style={{ fontSize: 15, color: '#f2f2f2', textAlign: 'center' }}> {props.user.studentDetail.degreeType}  </Text>
-              <Text style={{ color: '#f2f2f2' }}>  </Text>
+              <TouchableOpacity style={styles.LogoutButton} onPress={handleLogOutPress()}>
+                <Text style={{ color: 'white', textAlign: 'center' }}> Log Out </Text>
+              </TouchableOpacity>
             </View>
 
           </View>
@@ -63,13 +65,8 @@ const ProfileScreen = (props) => {
             iconSrc={require('../../../assets/images/menu/test.png')}
             text='CDP Manual'
             to="Test" />
-          <LogoutButton
-            color1='#fe4843'
-            color2='#db0a6c'
-            text='Logout' />
 
         </View>
-        {console.log(props.currentUser)}
 
       </SafeAreaView>
     </SafeAreaProvider>
@@ -80,6 +77,11 @@ const mapStateToProps = state => ({
   user: state.userDetails,
   error: state.errorMessage
 })
+
+//Map your action creators to your props.
+const mapDispatchToProps = {
+  
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -107,7 +109,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: "wrap",
     alignContent: 'flex-start',
+  },
+  LogoutButton: {
+    marginTop: 8,
+    paddingVertical: 6,
+    paddingHorizontal: 14,
+    backgroundColor: 'red'
   }
 })
 
-export default connect(mapStateToProps)(ProfileScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen)

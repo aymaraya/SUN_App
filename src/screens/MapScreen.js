@@ -1,38 +1,39 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import {
-  View,
-  Dimensions,
   StyleSheet,
-  TouchableOpacity
+  Linking,
+  View,
+  Text
 } from 'react-native';
-import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
-import HomeHeader from './../components/HomeHeader'
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { WebView } from 'react-native-webview';
 
-import { MapView } from 'expo';
+import HomeHeader from '../components/HomeHeader';
 
-export default MapScreen = ({ navigation }) => {
+
+
+export default MapScreen = () => {
+  const openMap = () => {
+    Linking.openURL('https://maps.app.goo.gl/nzsiNYeGe9PAdrP57');
+  }
+  useEffect(() => {
+    openMap();
+  }, []);
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView>
       <HomeHeader />
-      {/**<MapView
-        style={{ flex: 1, width, height }}
-        showUserLocation
-        initialRegion={{
-          latitude: 11.985719,
-          longitude: 8.533093,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      >
-        <MapView.Marker
-          coordinate={{
-            latitude: 11.985719,
-            longitude: 8.533093
-          }}
-          title={"Skyline University Nigeria"}
-          description={"University in Kano"}
-        />
-        </MapView>**/}
+      <View style={{alignItems: 'center', paddingTop: 256, paddingBottom: 256}}>
+        <TouchableOpacity 
+          style={{backgroundColor: 'blue', paddingVertical: 12, paddingHorizontal: 24, borderRadius: 6}}
+          onPress={() => openMap()}>
+          <Text style={{textAlign: 'center', color: 'white'}}>
+            Open Map  
+        </Text>
+        </TouchableOpacity>
+      </View>
+
     </SafeAreaView>
   );
 }
@@ -40,5 +41,14 @@ export default MapScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
+    backgroundColor: 'red'
   },
+  titleBar: {
+    backgroundColor: '#eee',
+    paddingTop: 0,
+    paddingLeft: 18,
+    paddingBottom: 5
+  }
+
 });

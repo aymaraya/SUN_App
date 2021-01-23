@@ -6,7 +6,7 @@ const initialState = {
   loading: false,
   //Have the loading state indicate if the user is authenticated.
   isAuthenticated: false,
-  //Have state for error message for recieving an error.
+  //Have state for error message for receiving an error.
   errorMessage: 'no',
 }
 
@@ -20,7 +20,7 @@ const reducer = (state = initialState, action) => {
       return { ...state, userDetails: action.payload, loading: action.loading, isAuthenticated: action.isAuthenticated };
     case 'LOGIN_FAILED':
       return { ...state, errorMessage: action.payload, loading: action.loading };
-    default:
+      default:
       return state;
   }
 }

@@ -18,15 +18,13 @@ const NotificationScreen = (props) => {
   useEffect(() => {
     const getSchedule = async () => {
       try {
-
         const result = await axios.get(
-          'http://api.sun.edu.ng:6060/api/class-schedule/1113/studentId'
+          'https://api.sun.edu.ng/api/class-schedule/1113/studentId'
         );
-
         setSchedule(result.data);
 
         setLoading(false);
-
+        console.log(schedule)
       } catch (error) {
       }
     };
@@ -35,20 +33,24 @@ const NotificationScreen = (props) => {
 
 
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.body}>
-          <Text style={{ fontSize: 32, fontWeight: "bold" }}>Notifications </Text>
-          {console.log(props.currentUser)}
-        </ScrollView>
-      </SafeAreaView>
-    </SafeAreaProvider>
+    <SafeAreaView style={styles.container}>
+      {isLoading ? (
+        <ActivityIndicator />
+        ) : (
+          <ScrollView style={styles.body}>
+            <Text style={{ fontSize: 32, fontWeight: "bold" }}>Notifications </Text>
+            {console.log(props.user)}
+          </ScrollView>
+        )
+      }
+
+    </SafeAreaView>
   )
 }
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.userDetails
+    user: state.userDetails
   }
 }
 

@@ -8,7 +8,8 @@ import {
   Text,
   Image,
   TextInput,
-  Alert
+  Alert,
+  ScrollView
 } from 'react-native';
 
 import { connect } from 'react-redux';
