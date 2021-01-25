@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
+import { logoutUser } from './../../../store';
 
 import Menu from './../../components/Menu';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
@@ -17,9 +18,7 @@ import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 const ProfileScreen = (props) => {
   const image = 'data:image/png;base64,'
 
-  const handleLogOutPress = () => {
-    
-  }
+
   return (
     <SafeAreaProvider>
 
@@ -29,10 +28,11 @@ const ProfileScreen = (props) => {
           <View style={styles.profileContainer}>
 
             <Image source={{ uri: image + props.user.studentDetail.photo }} style={styles.thumbnail} />
+
             <View style={styles.detailsContainer}>
               <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white', textAlign: 'center' }}> {props.user.studentDetail.dept} </Text>
-              <Text style={{ fontSize: 15, color: '#f2f2f2', textAlign: 'center' }}> {props.user.studentDetail.degreeType}  </Text>
-              <TouchableOpacity style={styles.LogoutButton} onPress={handleLogOutPress()}>
+              <Text style={{ fontSize: 15, color: '#f2f2f2', textAlign: 'center' }}>  </Text>
+              <TouchableOpacity style={styles.LogoutButton} onPress={() => { props.logoutUser() }}>
                 <Text style={{ color: 'white', textAlign: 'center' }}> Log Out </Text>
               </TouchableOpacity>
             </View>
@@ -44,27 +44,41 @@ const ProfileScreen = (props) => {
           <Menu
             color1='#01dd9b'
             color2='#14bb9d'
-            iconSrc={require('../../../assets/images/menu/about.png')}
+            iconSrc={require('../../../assets/images/menu/data.png')}
             text='My Data'
-            to='Schedule' />
+            to='My Data' />
           <Menu
             color1='#25446c'
             color2='#003067'
-            iconSrc={require('../../../assets/images/menu/tour.png')}
+            iconSrc={require('../../../assets/images/menu/course.png')}
             text='Course Info'
-            to="Attendance" />
+            to="Course Info" />
           <Menu
             color1='#00c4c6'
             color2='#069ec3'
-            iconSrc={require('../../../assets/images/menu/map.png')}
+            iconSrc={require('../../../assets/images/menu/request.png')}
             text='E-request'
-            to="Map" />
+            to="E Request" />
           <Menu
             color1='#8057fc'
             color2='#5d4fed'
-            iconSrc={require('../../../assets/images/menu/test.png')}
+            iconSrc={require('../../../assets/images/menu/manual.png')}
             text='CDP Manual'
-            to="Test" />
+            to="CDP Manual" />
+
+          <Menu
+            color1='#0a4f3c'
+            color2='#4f0a40'
+            iconSrc={require('../../../assets/images/menu/appointment.png')}
+            text='Appointment'
+            to="Appointment" />
+
+          <Menu
+            color1='#ff8c00'
+            color2='#911f00'
+            iconSrc={require('../../../assets/images/menu/complaint.png')}
+            text='Complaint'
+            to="Complaint" />
 
         </View>
 
@@ -75,12 +89,12 @@ const ProfileScreen = (props) => {
 
 const mapStateToProps = state => ({
   user: state.userDetails,
-  error: state.errorMessage
+  isAuthenticated: state.isAuthenticated
 })
 
 //Map your action creators to your props.
 const mapDispatchToProps = {
-  
+  logoutUser
 }
 
 const styles = StyleSheet.create({

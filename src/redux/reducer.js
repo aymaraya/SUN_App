@@ -20,7 +20,9 @@ const reducer = (state = initialState, action) => {
       return { ...state, userDetails: action.payload, loading: action.loading, isAuthenticated: action.isAuthenticated };
     case 'LOGIN_FAILED':
       return { ...state, errorMessage: action.payload, loading: action.loading };
-      default:
+    case 'LOGOUT':
+      return { ...state, loading: action.loading, isAuthenticated: action.isAuthenticated}
+    default:
       return state;
   }
 }

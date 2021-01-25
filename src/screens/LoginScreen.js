@@ -66,7 +66,7 @@ const LoginScreen = (props) => {
             </Text>
         <TouchableOpacity onPress={() => props.navigation.navigate('Home')}>
           <Text style={{ color: '#d55154', textAlign: 'center' }}>
-            Click here! {props.error}
+            Click here! 
           </Text>
         </TouchableOpacity>
       </View>

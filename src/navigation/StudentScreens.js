@@ -8,8 +8,32 @@ import ScheduleScreen from '../screens/logined/Schedule';
 import AttendanceScreen from '../screens/logined/Attendance';
 import NotificationScreen from '../screens/logined/Notification';
 import ProfileScreen from '../screens/logined/ProfileScreen';
+import MyDataScreen from '../screens/logined/subscreens/MyData';
+import ERequestScreen from '../screens/logined/subscreens/ERequest';
+import CDPManualScreen from '../screens/logined/subscreens/CDPManual';
+import CourseInfoScreen from '../screens/logined/subscreens/CourseInfo';
+import AppointmentScreen from '../screens/logined/subscreens/Appointment';
+import ComplaintScreen from '../screens/logined/subscreens/Complaint';
+
+import { createStackNavigator } from "@react-navigation/stack";
 
 const Tab = createBottomTabNavigator();
+
+const ProfileStack = createStackNavigator();
+
+const ProfileStackScreen = () => {
+  return (
+    <ProfileStack.Navigator headerMode="none">
+      <ProfileStack.Screen name="Profile" component={ProfileScreen}/>
+      <ProfileStack.Screen name="My Data" component={MyDataScreen}/>
+      <ProfileStack.Screen name="Course Info" component={CourseInfoScreen}/>
+      <ProfileStack.Screen name="E Request" component={ERequestScreen}/>
+      <ProfileStack.Screen name="CDP Manual" component={CDPManualScreen}/>
+      <ProfileStack.Screen name="Appointment" component={AppointmentScreen}/>
+      <ProfileStack.Screen name="Complaint" component={ComplaintScreen}/>
+    </ProfileStack.Navigator>
+  )
+}
 
 const StudentScreens = () => {
   return (
@@ -40,7 +64,7 @@ const StudentScreens = () => {
       <Tab.Screen name="Schedule" component={ScheduleScreen} />
       <Tab.Screen name="Attendance" component={AttendanceScreen} />
       <Tab.Screen name="Notification" component={NotificationScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Profile" component={ProfileStackScreen} />
     </Tab.Navigator>
   )
 }
