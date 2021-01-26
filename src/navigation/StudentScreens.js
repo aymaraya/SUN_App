@@ -6,7 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import ScheduleScreen from '../screens/logined/Schedule';
 import AttendanceScreen from '../screens/logined/Attendance';
-import NotificationScreen from '../screens/logined/Notification';
+import AssessmentScreen from '../screens/logined/Assessment';
 import ProfileScreen from '../screens/logined/ProfileScreen';
 import MyDataScreen from '../screens/logined/subscreens/MyData';
 import ERequestScreen from '../screens/logined/subscreens/ERequest';
@@ -47,7 +47,7 @@ const StudentScreens = () => {
             iconName = `ios-calendar`;
           } else if (route.name === 'Attendance') {
             iconName = `ios-checkmark-circle`;
-          } else if (route.name === 'Notification') {
+          } else if (route.name === 'Assessment') {
             iconName = `ios-notifications`;
           } else {
             iconName = `md-person`;
@@ -63,7 +63,7 @@ const StudentScreens = () => {
       >
       <Tab.Screen name="Schedule" component={ScheduleScreen} />
       <Tab.Screen name="Attendance" component={AttendanceScreen} />
-      <Tab.Screen name="Notification" component={NotificationScreen} />
+      <Tab.Screen name="Assessment" component={AssessmentScreen} />
       <Tab.Screen name="Profile" component={ProfileStackScreen} />
     </Tab.Navigator>
   )

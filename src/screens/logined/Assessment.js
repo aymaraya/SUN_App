@@ -10,7 +10,7 @@ import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { connect } from 'react-redux';
 
 
-const NotificationScreen = (props) => {
+const AssessmentScreen = (props) => {
 
   const [isLoading, setLoading] = useState(true);
   const [schedule, setSchedule] = useState();
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(mapStateToProps)(NotificationScreen)
+export default connect(mapStateToProps)(AssessmentScreen)
