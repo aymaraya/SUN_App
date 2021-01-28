@@ -18,6 +18,9 @@ import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 const ProfileScreen = (props) => {
   const image = 'data:image/png;base64,'
 
+  const photo = image + props.user.photo
+  const name = props.user.studentName;
+  const course = props.user.course;
 
   return (
     <SafeAreaProvider>
@@ -27,11 +30,11 @@ const ProfileScreen = (props) => {
 
           <View style={styles.profileContainer}>
 
-            <Image source={{ uri: image + props.user.studentDetail.photo }} style={styles.thumbnail} />
+            <Image source={{ uri: photo }} style={styles.thumbnail} />
 
             <View style={styles.detailsContainer}>
-              <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white', textAlign: 'center' }}> {props.user.studentDetail.dept} </Text>
-              <Text style={{ fontSize: 15, color: '#f2f2f2', textAlign: 'center' }}>  </Text>
+              <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white', textAlign: 'center' }}> {name} </Text>
+              <Text style={{ fontSize: 15, color: '#f2f2f2', textAlign: 'center' }}> {course} </Text>
               <TouchableOpacity style={styles.LogoutButton} onPress={() => { props.logoutUser() }}>
                 <Text style={{ color: 'white', textAlign: 'center' }}> Log Out </Text>
               </TouchableOpacity>

@@ -22,6 +22,7 @@ const HomeHeader = ({ Home }) => {
           <Text style={{ color: '#007AFF' }}>
             Back
           </Text>
+          <Text> </Text>
         </View>
       </TouchableOpacity>
     </View>

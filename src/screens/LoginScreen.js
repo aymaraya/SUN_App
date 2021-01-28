@@ -47,17 +47,7 @@ const LoginScreen = (props) => {
       <View style={{ flexDirection: 'column' }}>
         <Button title="Apply Now" buttonStyle={styles.applyButton}
           onPress={() => props.navigation.navigate('Admission')} />
-        <View style={{ flexDirection: 'row', marginTop: 10 }}>
-          <View style={[styles.inputContainer, styles.refNoInput]}>
-            <TextInput
-              style={{ height: 40, paddingLeft: 10 }}
-              placeholder="Application ref number"
-              onChangeText={(text) => this.setState({ text })}
-            />
-          </View>
-          <Button title="Check Status" buttonStyle={styles.statusButton}
-            onPress={() => props.navigation.navigate('CheckStatus')} />
-        </View>
+        
       </View>
 
       <View>

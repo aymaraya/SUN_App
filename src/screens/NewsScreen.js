@@ -5,23 +5,22 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { WebView } from 'react-native-webview';
-import {
-  Container
-} from 'native-base';
+
 import HomeHeader from '../components/HomeHeader';
 
 export default NewsScreen = ({navigation}) => {
   return (
-    <Container>
+    <SafeAreaView>
       <HomeHeader />
       <WebView
         source={{ uri: 'https://sun.edu.ng/news/' }}
         style={{ paddingTop: 0 }}
       />
 
-    </Container>
+    </SafeAreaView>
   );
 }
 

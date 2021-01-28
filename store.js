@@ -27,18 +27,20 @@ export const loginUser = () => {
 
       })
         .then(response => {
-          dispatch(loginSuccessful(response.data))
-          console.log(response.data)
+          dispatch(loginSuccessful(response.data.result.studentDetail))
+          console.log(response.data.result.studentDetail)
         }
         )
         .catch(err => {
           dispatch(loginFailed(err))
+          alert(err)
           console.log(err)
         })
     }
     catch (error) {
-      console.log(error)
       dispatch(loginFailed(error))
+      alert(error)
+      console.log(error)
     }
   }
 }

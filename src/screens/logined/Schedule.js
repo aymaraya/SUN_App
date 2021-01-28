@@ -10,29 +10,6 @@ import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import axios from 'axios'
 import { FlatList } from 'react-native-gesture-handler';
 
-const Schedule = ({ day, session1, session2, session3, session4, session5 }) => {
-  <View style={{ backgroundColor: '#004987', marginBottom: 14, padding: 14, borderRadius: 8 }}>
-    <Text style={{ fontSize: 16, marginBottom: 5, color: 'white' }}>
-      {day}
-    </Text>
-    <Text style={{ color: '#f6f6f6' }}>
-      * {session1}
-    </Text>
-    <Text style={{ color: '#f6f6f6' }}>
-      * {session2}
-    </Text>
-    <Text style={{ color: '#f6f6f6' }}>
-      * {session3}
-    </Text>
-    <Text style={{ color: '#f6f6f6' }}>
-      * {session4}
-    </Text>
-    <Text style={{ color: '#f6f6f6' }}>
-      * {session5}
-    </Text>
-  </View>
-}
-
 export default ScheduleScreen = () => {
 
   const [isLoading, setLoading] = useState(true);
@@ -70,7 +47,7 @@ export default ScheduleScreen = () => {
         <Text style={{ fontSize: 32, fontWeight: "bold" }}>My Schedule </Text>
         <Text style={{ marginTop: 4, color: '#333333' }}>Below is your Weekly Schedule </Text>
         {isLoading ? (
-          <ActivityIndicator />
+          <ActivityIndicator size='large'/>
         ) : (
             <ScrollView style={{ marginTop: 24 }}>
 
