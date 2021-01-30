@@ -5,21 +5,39 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { WebView } from 'react-native-webview';
+import {
+  Container,
+  Header,
+  Left,
+  Title,
+  Icon,
+  Button,
+  Body,
+  Right
+} from 'native-base';
 
-import HomeHeader from '../components/HomeHeader';
-
-export default TourScreen = () => {
+export default TourScreen = (props) => {
   return (
-    <SafeAreaView>
-      <HomeHeader />
+    <Container>
+      <Header>
+        <Left>
+          <Button transparent onPress={() => props.navigation.navigate('Home')}>
+            <Icon name="arrow-back" />
+          </Button>
+        </Left>
+        <Body>
+          <Title>Aptitude Test</Title>
+        </Body>
+        <Right />
+      </Header>
       <WebView
         source={{ uri: 'https://www.360human.com.ng/tour/skyline-university-entrance-reception-car-park-library-marketing-area-computer-labs-ssd/skinned/' }}
         style={{ paddingTop: 0 }}
       />
 
-    </SafeAreaView>
+    </Container>
   );
 }
 

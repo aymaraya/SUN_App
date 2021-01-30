@@ -14,7 +14,7 @@ import axios from 'axios';
 const store = createStore(reducer, applyMiddleware(thunk))
 
 //Define your action creators that will be responsible for asynchronous operation 
-export const loginUser = () => {
+export const loginUser = (username, password) => {
   //IN order to use await your callback must be asynchronous using async keyword.
   return async dispatch => {
 
@@ -23,7 +23,7 @@ export const loginUser = () => {
       await axios({
         method: 'post',
         url: 'https://api.sun.edu.ng/api/login/authenticate',
-        data: { username: '1113', password: '1113@Sky123' },
+        data: { username: username, password: password },
 
       })
         .then(response => {

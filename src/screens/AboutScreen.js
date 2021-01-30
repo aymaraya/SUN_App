@@ -1,26 +1,42 @@
 import React, { Component } from 'react';
 import {
   View,
-  StyleSheet,
-  TouchableOpacity,
-  Text
+  StyleSheet
 } from 'react-native';
-import { SafeAreaView} from 'react-native-safe-area-context';
-import HomeHeader from './../components/HomeHeader'
+import {
+  Container,
+  Header,
+  Left,
+  Title,
+  Icon,
+  Button,
+  Body,
+  Right
+} from 'native-base';
 import { WebView } from 'react-native-webview';
 
-export default AboutScreen = ({ navigation }) => {
+export default AboutScreen = (props) => {
 
   return (
-      <SafeAreaView style={styles.container}>
-        <HomeHeader />
-        <View style={styles.contentContainer}>
-          <WebView
-            source={{ uri: 'https://sun.edu.ng/about/' }}
-            style={{ paddingTop: 0 }}
-          />
-        </View>
-      </SafeAreaView>
+    <Container style={styles.container}>
+      <Header>
+        <Left>
+          <Button transparent onPress={() => props.navigation.navigate('Home')}>
+            <Icon name="arrow-back" />
+          </Button>
+        </Left>
+        <Body>
+          <Title>About Us </Title>
+        </Body>
+        <Right />
+      </Header>
+      <View style={styles.contentContainer}>
+        <WebView
+          source={{ uri: 'https://sun.edu.ng/about/' }}
+          style={{ paddingTop: 0 }}
+        />
+      </View>
+    </Container>
   )
 }
 

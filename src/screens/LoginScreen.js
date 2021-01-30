@@ -28,7 +28,7 @@ const LoginScreen = (props) => {
       Alert.alert('Error', 'Please input your login details')
     }
     else {
-      props.loginUser({ username: '1113', password: '1113@Sky' })
+      props.loginUser( username, password)
     }
   }
 

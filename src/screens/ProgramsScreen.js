@@ -1,27 +1,38 @@
 import React, { Component } from 'react';
 import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
+  StyleSheet
 } from 'react-native';
 
 import { WebView } from 'react-native-webview';
 
-import { Header, Icon } from 'react-native-elements';
-
 import {
   Container,
+  Header,
   Tab,
-  Tabs
+  Tabs,
+  Left,
+  Title,
+  Icon,
+  Button,
+  Body,
+  Right
 } from 'native-base';
-import HomeHeader from './../components/HomeHeader'
 
 
-export default ProgramScreen = ({ navigation }) => {
+export default ProgramScreen = (props) => {
   return (
     <Container>
-      <HomeHeader />
+      <Header>
+        <Left>
+          <Button transparent onPress={() => props.navigation.navigate('Home')}>
+            <Icon name="arrow-back" />
+          </Button>
+        </Left>
+        <Body>
+          <Title>Programs</Title>
+        </Body>
+        <Right />
+      </Header>
       <Tabs tabBarUnderlineStyle={{ backgroundColor: '#007AFF' }}>
         <Tab heading="Program I"
           tabStyle={{ backgroundColor: '#fff' }}
@@ -46,7 +57,7 @@ export default ProgramScreen = ({ navigation }) => {
           />
         </Tab>
       </Tabs>
-      
+
     </Container>
   );
 }

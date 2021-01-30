@@ -7,20 +7,36 @@ import {
 } from 'react-native';
 
 import { WebView } from 'react-native-webview';
-import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
-import HomeHeader from './../components/HomeHeader'
+import {
+  Container,
+  Header,
+  Left,
+  Title,
+  Icon,
+  Button,
+  Body,
+  Right
+} from 'native-base';
 
-export default TestScreen = ({ navigation }) => {
+export default TestScreen = (props) => {
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        <HomeHeader />
-        <WebView
-          source={{ uri: 'https://apt.sun.edu.ng' }}
-          style={{ paddingTop: 0 }}
-        />
-      </SafeAreaView>
-    </SafeAreaProvider>
+    <Container>
+      <Header>
+        <Left>
+          <Button transparent onPress={() => props.navigation.navigate('Home')}>
+            <Icon name="arrow-back" />
+          </Button>
+        </Left>
+        <Body>
+          <Title>Aptitude Test</Title>
+        </Body>
+        <Right />
+      </Header>
+      <WebView
+        source={{ uri: 'https://apt.sun.edu.ng' }}
+        style={{ paddingTop: 0 }}
+      />
+    </Container>
   );
 }
 

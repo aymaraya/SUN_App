@@ -26,7 +26,7 @@ const ProfileScreen = (props) => {
     <SafeAreaProvider>
 
       <SafeAreaView style={styles.container}>
-        <View style={{ backgroundColor: '#4630EB', padding: 30 }}>
+        <View style={{ backgroundColor: '#d55154', padding: 30 }}>
 
           <View style={styles.profileContainer}>
 
@@ -131,7 +131,8 @@ const styles = StyleSheet.create({
     marginTop: 8,
     paddingVertical: 6,
     paddingHorizontal: 14,
-    backgroundColor: 'red'
+    borderRadius: 6,
+    backgroundColor: '#b70000'
   }
 })
 

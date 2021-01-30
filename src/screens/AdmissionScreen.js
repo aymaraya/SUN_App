@@ -7,49 +7,38 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Header, Icon } from 'react-native-elements';
-
 import {
   Container,
+  Header,
   Tab,
-  Tabs
+  Tabs,
+  Left,
+  Title,
+  Icon,
+  Button,
+  Body,
+  Right
 } from 'native-base';
 
 import Procedure from './subscreens/Procedure';
 import Requirements from './subscreens/Requirements';
 import Application from './subscreens/Application';
 
-export default AdmissionScreen = ({ navigation }) => {
+export default AdmissionScreen = (props) => {
   return (
-    <SafeAreaView>
       <Container>
-        <Header
-          barStyle="light-content"
-          leftComponent={
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Icon
-                  name='chevron-left'
-                  color='#007AFF'
-                  size={28}
-                />
-                <Text style={{ color: '#007AFF' }}>
-                  Home
-                </Text>
-              </View>
-            </TouchableOpacity>
-          }
-          rightComponent={{ icon: 'share', color: '#007AFF', size: 18, marginRight: 15 }}
-          containerStyle={{
-            backgroundColor: '#eee',
-            justifyContent: 'space-around',
-          }}
-        />
-        <View style={styles.titleBar}>
-          <Text style={{ fontSize: 22, fontWeight: 'bold' }}>
-            Admissions
-          </Text>
-        </View>
+        <Header>
+          <Left>
+            <Button transparent  onPress={() => props.navigation.navigate('Home')}>
+              <Icon name="arrow-back" />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Admission</Title>
+          </Body>
+          <Right />
+        </Header>
+        
         <Tabs tabBarUnderlineStyle={{ backgroundColor: '#007AFF' }}>
           <Tab heading="Procedures"
             tabStyle={{ backgroundColor: '#fff' }}
@@ -77,7 +66,6 @@ export default AdmissionScreen = ({ navigation }) => {
           </Tab>
         </Tabs>
       </Container>
-    </SafeAreaView>
 
   );
 }

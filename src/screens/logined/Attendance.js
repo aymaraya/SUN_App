@@ -7,9 +7,10 @@ import {
   Button,
   ActivityIndicator,
 } from 'react-native';
-import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import axios from 'axios'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default AttendanceScreen = () => {
 
@@ -71,82 +72,80 @@ export default AttendanceScreen = () => {
 
 
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.body}>
-          <Text style={{ fontSize: 32, fontWeight: "bold" }}>My Attendance </Text>
-          <Text style={{ marginTop: 4, color: '#333333' }}>Select "From" and "to" date to fetch Attendance </Text>
-          <View style={{ marginTop: 24 }}>
-            <View>
-              <Button onPress={showFromDatepicker} title="From" />
-            </View>
-            <View style={{ marginTop: 6 }}>
-              <Button onPress={showToDatepicker} title="To" />
-            </View>
-            {showFrom && (
-              <DateTimePicker
-                value={fromDate}
-                mode='date'
-                display="calendar"
-                dateFormat='year month day'
-                onChange={onChangeFrom}
-              />
-            )}
-            {showTo && (
-              <DateTimePicker
-                value={toDate}
-                mode='date'
-                display="calendar"
-                dateFormat='year month day'
-
-                onChange={onChangeTo}
-              />
-            )}
-            <View style={{ marginTop: 8 }}>
-              <Button onPress={getAttendance} title="FETCH ATTENDANCE" color='blue' />
-            </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.body}>
+        <Text style={{ fontSize: 32, fontWeight: "bold" }}>My Attendance </Text>
+        <Text style={{ marginTop: 4, color: '#333333' }}>Select "From" and "to" date to fetch Attendance </Text>
+        <View style={{ marginTop: 24 }}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <Button onPress={showFromDatepicker} title="From" color='white' />
+            <Button onPress={showToDatepicker} title="To" color='grey' />
           </View>
 
-          {(() => {
-            if (isLoading === 'empty') {
-              return (
-                <View>
+          <View style={{ marginTop: 8 }}>
+            <Button onPress={getAttendance} title="FETCH ATTENDANCE" color='blue' />
+          </View>
+          
+          {showFrom && (
+            <DateTimePicker
+              value={fromDate}
+              mode='date'
+              display="calendar"
+              dateFormat='year month day'
+              onChange={onChangeFrom}
+            />
+          )}
+          {showTo && (
+            <DateTimePicker
+              value={toDate}
+              mode='date'
+              display="calendar"
+              dateFormat='year month day'
 
-                </View>
-              )
-            } else if (isLoading === 'loading') {
-              return (
-                <View style={{marginTop: 24}}>
-                  <ActivityIndicator size='large' />
-                </View>
-              )
-            } else {
-              return (
-                <ScrollView style={{ marginTop: 24 }}>
-                  {
-                    attendance.map((item, key) => (
-                      <View key={key} style={{ backgroundColor: '#004987', marginBottom: 14, padding: 14, borderRadius: 8 }}>
-                        <Text style={{ fontSize: 16, marginBottom: 5, color: 'white' }}>
-                          {item.cdD_Description}
-                        </Text>
-                        <Text style={{ color: '#f6f6f6' }}>
-                          {item.empName}
-                        </Text>
-                        <Text style={{ color: '#f6f6f6' }}>
-                          From: {item.from} To: {item.to}
-                        </Text>
-
-                      </View>
-                    ))
-                  }
-                </ScrollView>
-              )
-            }
-
-          })()}
+              onChange={onChangeTo}
+            />
+          )}
         </View>
-      </SafeAreaView>
-    </SafeAreaProvider>
+
+        {(() => {
+          if (isLoading === 'empty') {
+            return (
+              <View>
+
+              </View>
+            )
+          } else if (isLoading === 'loading') {
+            return (
+              <View style={{ marginTop: 24 }}>
+                <ActivityIndicator size='large' />
+              </View>
+            )
+          } else {
+            return (
+              <ScrollView style={{ marginTop: 24 }}>
+                {
+                  attendance.map((item, key) => (
+                    <View key={key} style={{ backgroundColor: '#004987', marginBottom: 14, padding: 14, borderRadius: 8 }}>
+                      <Text style={{ fontSize: 16, marginBottom: 5, color: 'white' }}>
+                        {item.cdD_Description}
+                      </Text>
+                      <Text style={{ color: '#f6f6f6' }}>
+                        {item.empName}
+                      </Text>
+                      <Text style={{ color: '#f6f6f6' }}>
+                        From: {item.from} To: {item.to}
+                      </Text>
+
+                    </View>
+                  ))
+                }
+              </ScrollView>
+            )
+          }
+
+        })()}
+      </View>
+    </SafeAreaView>
   )
 }
 

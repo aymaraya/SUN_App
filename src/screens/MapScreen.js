@@ -6,14 +6,19 @@ import {
   Text
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { WebView } from 'react-native-webview';
 
-import HomeHeader from '../components/HomeHeader';
+import {
+  Container,
+  Header,
+  Left,
+  Title,
+  Icon,
+  Button,
+  Body,
+  Right
+} from 'native-base';
 
-
-
-export default MapScreen = () => {
+export default MapScreen = (props) => {
   const openMap = () => {
     Linking.openURL('https://maps.app.goo.gl/nzsiNYeGe9PAdrP57');
   }
@@ -22,19 +27,29 @@ export default MapScreen = () => {
   }, []);
 
   return (
-    <SafeAreaView>
-      <HomeHeader />
-      <View style={{alignItems: 'center', paddingTop: 256, paddingBottom: 256}}>
-        <TouchableOpacity 
-          style={{backgroundColor: 'blue', paddingVertical: 12, paddingHorizontal: 24, borderRadius: 6}}
+    <Container>
+      <Header>
+        <Left>
+          <Button transparent onPress={() => props.navigation.navigate('Home')}>
+            <Icon name="arrow-back" />
+          </Button>
+        </Left>
+        <Body>
+          <Title>Maps and Directions </Title>
+        </Body>
+        <Right />
+      </Header>
+      <View style={{ alignItems: 'center', paddingTop: 256, paddingBottom: 256 }}>
+        <TouchableOpacity
+          style={{ backgroundColor: 'blue', paddingVertical: 12, paddingHorizontal: 24, borderRadius: 6 }}
           onPress={() => openMap()}>
-          <Text style={{textAlign: 'center', color: 'white'}}>
-            Open Map  
+          <Text style={{ textAlign: 'center', color: 'white' }}>
+            Open Map
         </Text>
         </TouchableOpacity>
       </View>
 
-    </SafeAreaView>
+    </Container>
   );
 }
 
