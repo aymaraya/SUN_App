@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { Icon } from 'react-native-elements';
+import { connect } from 'react-redux'
 import axios from 'axios'
 
 const DataItem = (props) => {
@@ -24,7 +25,7 @@ const DataItem = (props) => {
   )
 }
 
-export default MyDataScreen = (props) => {
+const MyDataScreen = (props) => {
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState();
@@ -32,7 +33,6 @@ export default MyDataScreen = (props) => {
   useEffect(() => {
     const getSchedule = async () => {
       try {
-
         await axios({
           method: 'get',
           url: 'https://api.sun.edu.ng/api/student-detail/1113/studentId',
@@ -44,10 +44,12 @@ export default MyDataScreen = (props) => {
             console.log(data)
           })
           .catch(err => {
-            console.log(err)
+            alert.log(err)
+            setLoading(false)
           })
       } catch (error) {
-        console.log(error)
+        alert.log(error)
+        setLoading(false)
       }
     };
     getSchedule();
@@ -90,6 +92,9 @@ export default MyDataScreen = (props) => {
   )
 }
 
+const mapStateToProps = state => ({
+  user: state.userDetails
+})
 
 const styles = StyleSheet.create({
   container: {
@@ -109,3 +114,5 @@ const styles = StyleSheet.create({
     marginBottom: 24
   },
 })
+
+export default connect(mapStateToProps)(MyDataScreen)

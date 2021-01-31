@@ -1,40 +1,36 @@
 import React, { Component } from 'react';
 import {
   View,
-  StyleSheet,
   Text,
-  TouchableOpacity,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { WebView } from 'react-native-webview';
+import { connect } from 'react-redux';
+import { Icon } from 'react-native-elements';
 
-import HomeHeader from '../../../components/HomeHeader';
-
-export default AppointmentScreen = () => {
-  const id = '{1113}'
+const AppointmentScreen = (props) => {
   return (
-    <SafeAreaView>
-      <HomeHeader />
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 24, marginHorizontal: 14, marginBottom: 4 }}>
+
+        <Icon
+          name='arrow-back'
+          color='#007AFF'
+          size={28}
+          onPress={() => props.navigation.goBack()}
+        />
+        <Text style={{ fontSize: 32, fontWeight: "bold", marginLeft: 4 }}>Appointment </Text>
+      </View>
       <WebView
-        source={{ uri: 'http://comp.sun.edu.ng/#/dashboard?username=' + id }}
+        source={{ uri: 'http://comp.sun.edu.ng/#/dashboard?username=1113' }}
         style={{ paddingTop: 0 }}
       />
-
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    padding: 15
-  },
-  titleBar: {
-    backgroundColor: '#eee',
-    paddingTop: 0,
-    paddingLeft: 18,
-    paddingBottom: 5
-  }
+const mapStateToProps = state => ({
+  user: state.userDetails
+})
 
-});
+export default connect(mapStateToProps)(AppointmentScreen)

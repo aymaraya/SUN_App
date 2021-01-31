@@ -4,18 +4,21 @@ import {
   StyleSheet,
   ScrollView,
   Text,
-  Button,
   ActivityIndicator,
 } from 'react-native';
+
+import { Button } from 'react-native-elements';
+
 import { SafeAreaView } from 'react-native-safe-area-context';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import axios from 'axios'
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default AttendanceScreen = () => {
+import { connect } from 'react-redux';
 
+const AttendanceScreen = (props) => {
   const [isLoading, setLoading] = useState('empty');
   const [attendance, setAttendance] = useState();
+  const [id, setId] = useState(props.user.studentId)
 
   const getAttendance = async () => {
     setLoading('loading')
@@ -24,9 +27,9 @@ export default AttendanceScreen = () => {
         method: 'post',
         url: 'https://api.sun.edu.ng/api/attendance',
         data: {
-          studentId: 1113,
-          from: fromDate,
-          to: toDate
+          'studentId': 1113,
+          'from': fromDate,
+          'to': toDate
         }
       })
         .then(response => {
@@ -35,10 +38,12 @@ export default AttendanceScreen = () => {
           console.log(attendance)
         })
         .catch(err => {
-          console.log(err)
+          alert('nan')
+          setLoading('empty')
         })
     } catch (error) {
-      console.log(error)
+      alert(error)
+      setLoading('empty')
     }
   };
 
@@ -77,15 +82,15 @@ export default AttendanceScreen = () => {
         <Text style={{ fontSize: 32, fontWeight: "bold" }}>My Attendance </Text>
         <Text style={{ marginTop: 4, color: '#333333' }}>Select "From" and "to" date to fetch Attendance </Text>
         <View style={{ marginTop: 24 }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Button onPress={showFromDatepicker} title="From" color='white' />
-            <Button onPress={showToDatepicker} title="To" color='grey' />
+          <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around' }}>
+            <Button onPress={showFromDatepicker} title="From" buttonStyle={{paddingHorizontal: 62, backgroundColor: '#A1CAF1'}}/>
+            <Button onPress={showToDatepicker} title="To" buttonStyle={{paddingHorizontal: 62, backgroundColor: '#A1CAF1'}} />
           </View>
 
           <View style={{ marginTop: 8 }}>
-            <Button onPress={getAttendance} title="FETCH ATTENDANCE" color='blue' />
+            <Button onPress={getAttendance} title="FETCH ATTENDANCE" buttonStyle={{backgroundColor: '#007FFF'}}/>
           </View>
-          
+
           {showFrom && (
             <DateTimePicker
               value={fromDate}
@@ -148,6 +153,9 @@ export default AttendanceScreen = () => {
     </SafeAreaView>
   )
 }
+const mapStateToProps = state => ({
+  user: state.userDetails
+})
 
 const styles = StyleSheet.create({
   container: {
@@ -158,5 +166,6 @@ const styles = StyleSheet.create({
   body: {
     flex: 1
   }
-
 })
+
+export default connect(mapStateToProps)(AttendanceScreen)

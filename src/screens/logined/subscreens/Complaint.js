@@ -1,39 +1,35 @@
 import React, { Component } from 'react';
 import {
   View,
-  StyleSheet,
   Text,
-  TouchableOpacity,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { WebView } from 'react-native-webview';
+import { connect } from 'react-redux';
+import { Icon } from 'react-native-elements';
 
-import HomeHeader from '../../../components/HomeHeader';
-
-export default ComplaintScreen = () => {
+const ComplaintScreen = (props) => {
   return (
-    <SafeAreaView>
-      <HomeHeader />
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 24, marginHorizontal: 14, marginBottom: 4 }}>
+        <Icon
+          name='arrow-back'
+          color='#007AFF'
+          size={28}
+          onPress={() => props.navigation.goBack()}
+        />
+        <Text style={{ fontSize: 32, fontWeight: "bold", marginLeft: 4 }}>Complaint </Text>
+      </View>
       <WebView
-        source={{ uri: 'https://www.360human.com.ng/tour/skyline-university-entrance-reception-car-park-library-marketing-area-computer-labs-ssd/skinned/' }}
+        source={{ uri: 'http://appt.sun.edu.ng/#/appointment?StudentId=1113' }}
         style={{ paddingTop: 0 }}
       />
-
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    padding: 15
-  },
-  titleBar: {
-    backgroundColor: '#eee',
-    paddingTop: 0,
-    paddingLeft: 18,
-    paddingBottom: 5
-  }
+const mapStateToProps = state => ({
+  user: state.userDetails
+})
 
-});
+export default connect(mapStateToProps)(ComplaintScreen)

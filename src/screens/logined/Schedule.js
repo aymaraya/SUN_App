@@ -7,10 +7,12 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import axios from 'axios'
+import { connect } from 'react-redux';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default ScheduleScreen = () => {
+const ScheduleScreen = (props) => {
+
 
   const [isLoading, setLoading] = useState(true);
   const [schedule, setSchedule] = useState();
@@ -21,7 +23,7 @@ export default ScheduleScreen = () => {
 
         await axios({
           method: 'get',
-          url: 'https://api.sun.edu.ng/api/class-schedule/1113/studentId'
+          url: 'https://api.sun.edu.ng/api/class-schedule/' + props.user.studentId + '/studentId'
         })
           .then(response => {
             setSchedule(response.data);
@@ -85,6 +87,10 @@ export default ScheduleScreen = () => {
   )
 }
 
+const mapStateToProps = state => ({
+  user: state.userDetails
+})
+
 const styles = StyleSheet.create({
   container: {
     marginTop: 24,
@@ -109,6 +115,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#dd1ddd', marginBottom: 14, padding: 14, borderRadius: 8
   },
   sun: {
-    backgroundColor: '#04C9E0', marginBottom: 14, padding: 14, borderRadius: 8
+    backgroundColor: '#06a1b2', marginBottom: 14, padding: 14, borderRadius: 8
   }
 })
+
+export default connect(mapStateToProps) (ScheduleScreen)

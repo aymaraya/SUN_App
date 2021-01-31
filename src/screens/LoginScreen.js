@@ -28,12 +28,12 @@ const LoginScreen = (props) => {
       Alert.alert('Error', 'Please input your login details')
     }
     else {
-      props.loginUser( username, password)
+      props.loginUser(username, password)
     }
   }
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
 
 
       <View style={{ marginTop: 10 }}>
@@ -47,22 +47,10 @@ const LoginScreen = (props) => {
       <View style={{ flexDirection: 'column' }}>
         <Button title="Apply Now" buttonStyle={styles.applyButton}
           onPress={() => props.navigation.navigate('Admission')} />
-        
+
       </View>
 
       <View>
-        <Text style={{ textAlign: 'center' }}>
-          Are you a Visitor?
-            </Text>
-        <TouchableOpacity onPress={() => props.navigation.navigate('Home')}>
-          <Text style={{ color: '#d55154', textAlign: 'center' }}>
-            Click here! 
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-
-      <KeyboardAvoidingView behavior="height" style={{ marginBottom: 20 }}>
 
         <View style={[styles.inputContainer, styles.loginInput]}>
           <TextInput
@@ -80,7 +68,7 @@ const LoginScreen = (props) => {
           />
         </View>
 
-        <View style={[styles.inputContainer, styles.loginInput, { marginTop: 10 }]}>
+        <View style={[styles.inputContainer, styles.loginInput, { marginTop: 6 }]}>
           <TextInput
             style={{ height: 40, paddingLeft: 10 }}
             placeholder="Password"
@@ -96,15 +84,30 @@ const LoginScreen = (props) => {
           />
         </View>
         {
-          props.loading ? <ActivityIndicator size="large" style={{ marginTop: 20 }} /> : (
-            <Button title="Login" buttonStyle={styles.loginButton}
-              onPress={handleLoginPress}
-            />
-          )
+          props.loading ? (
+            <View style={styles.activityIndicatorContainer}>
+              <ActivityIndicator size="small" color='white'/>
+            </View>
+          ) : (
+              <Button title="Login" buttonStyle={styles.loginButton}
+                onPress={handleLoginPress}
+              />
+            )
         }
 
-      </KeyboardAvoidingView>
-    </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 12 }}>
+          <Text style={{ textAlign: 'center' }}>
+            Are you a Visitor?
+            </Text>
+          <TouchableOpacity onPress={() => props.navigation.navigate('Home')}>
+            <Text style={{ color: '#d55154', textAlign: 'center' }}>
+              Click here!
+          </Text>
+          </TouchableOpacity>
+        </View>
+
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -154,8 +157,14 @@ const styles = StyleSheet.create({
   loginButton: {
     backgroundColor: '#FF9500',
     width: 300,
+    marginTop: 8,
+  },
+  activityIndicatorContainer: {
+    backgroundColor: '#FF9500',
+    width: 300,
     marginTop: 15,
-    marginBottom: 15
+    borderRadius: 6,
+    paddingVertical: 12
   },
 });
 
