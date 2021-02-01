@@ -11,18 +11,12 @@ import {
   Alert,
   ScrollView
 } from 'react-native';
-
 import { connect } from 'react-redux';
 import { loginUser } from './../../store';
-
 import { Button } from 'react-native-elements';
-
 const LoginScreen = (props) => {
-
-
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
   const handleLoginPress = () => {
     if (username == '' || password == '') {
       Alert.alert('Error', 'Please input your login details')
@@ -31,11 +25,8 @@ const LoginScreen = (props) => {
       props.loginUser(username, password)
     }
   }
-
   return (
     <KeyboardAvoidingView style={styles.container}>
-
-
       <View style={{ marginTop: 10 }}>
         <Image
           source={require('./../../assets/images/logo.png')}
@@ -43,15 +34,11 @@ const LoginScreen = (props) => {
           resizeMode='contain'
         />
       </View>
-
       <View style={{ flexDirection: 'column' }}>
         <Button title="Apply Now" buttonStyle={styles.applyButton}
           onPress={() => props.navigation.navigate('Admission')} />
-
       </View>
-
       <View>
-
         <View style={[styles.inputContainer, styles.loginInput]}>
           <TextInput
             style={{ height: 40, paddingLeft: 10 }}
@@ -67,7 +54,6 @@ const LoginScreen = (props) => {
             returnKeyType={"next"}
           />
         </View>
-
         <View style={[styles.inputContainer, styles.loginInput, { marginTop: 6 }]}>
           <TextInput
             style={{ height: 40, paddingLeft: 10 }}
@@ -89,40 +75,34 @@ const LoginScreen = (props) => {
               <ActivityIndicator size="small" color='white'/>
             </View>
           ) : (
-              <Button title="Login" buttonStyle={styles.loginButton}
-                onPress={handleLoginPress}
-              />
-            )
+            <Button title="Login" buttonStyle={styles.loginButton}
+              onPress={handleLoginPress}
+            />
+          )
         }
-
         <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 12 }}>
-          <Text style={{ textAlign: 'center' }}>
-            Are you a Visitor?
+          <Text style={{ fontFamily: 'Roboto_regular' }}>
+            Are you a Visitor? 
             </Text>
           <TouchableOpacity onPress={() => props.navigation.navigate('Home')}>
-            <Text style={{ color: '#d55154', textAlign: 'center' }}>
+            <Text style={{ color: '#d55154', marginLeft: 4, fontFamily: 'Roboto_medium' }}>
               Click here!
           </Text>
           </TouchableOpacity>
         </View>
-
       </View>
     </KeyboardAvoidingView>
   );
 };
-
-
 //Map the redux state to your props.
 const mapStateToProps = state => ({
   loading: state.loading,
   error: state.errorMessage
 })
-
 //Map your action creators to your props.
 const mapDispatchToProps = {
   loginUser
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -164,8 +144,7 @@ const styles = StyleSheet.create({
     width: 300,
     marginTop: 15,
     borderRadius: 6,
-    paddingVertical: 12
-  },
+    paddingVertical: 10
+  }
 });
-
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)

@@ -8,17 +8,18 @@ import {
   Image
 } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
-import { Icon } from 'react-native-elements';
+import  PWithBackHeader from './../../../components/PWithBackHeader';
+
 import { connect } from 'react-redux'
 import axios from 'axios'
 
 const DataItem = (props) => {
   return (
-    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginBottom: 12 }}>
-      <Text style={{ fontSize: 16, fontWeight: '700' }}>
+    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 8, marginBottom: 12 }}>
+      <Text style={{ fontSize: 16, fontFamily: 'Roboto_medium' }}>
         {props.title}
       </Text>
-      <Text style={{ flex: 1, marginLeft: 4 }}>
+      <Text style={{ flex: 1, marginLeft: 4, fontFamily: 'Roboto_regular' }}>
         {props.content}
       </Text>
     </View>
@@ -35,8 +36,8 @@ const MyDataScreen = (props) => {
       try {
         await axios({
           method: 'get',
-          url: 'https://api.sun.edu.ng/api/student-detail/1113/studentId',
-          data: { studentId: 1113 }
+          url: 'https://api.sun.edu.ng/api/student-detail/' + props.user.studentId + '/studentId',
+          data: { studentId: Number(props.user.studentId) }
         })
           .then(response => {
             setData(response.data);
@@ -58,16 +59,7 @@ const MyDataScreen = (props) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.body}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Icon
-            name='arrow-back'
-            color='#007AFF'
-            size={28}
-            onPress={() => props.navigation.goBack()}
-          />
-          <Text style={{ fontSize: 32, fontWeight: "bold", marginLeft: 4 }}>My Data </Text>
-        </View>
-
+        <PWithBackHeader title="My Data" />
         {isLoading ? (
           <ActivityIndicator size='large' />
         ) : (

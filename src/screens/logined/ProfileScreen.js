@@ -33,10 +33,10 @@ const ProfileScreen = (props) => {
             <Image source={{ uri: photo }} style={styles.thumbnail} />
 
             <View style={styles.detailsContainer}>
-              <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white', textAlign: 'center' }}> {name} </Text>
-              <Text style={{ fontSize: 15, color: '#f2f2f2', textAlign: 'center' }}> {course} </Text>
+              <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white', textAlign: 'center', fontFamily: 'Roboto_medium' }}> {name} </Text>
+              <Text style={{ fontSize: 14, color: 'white', textAlign: 'center', fontFamily: 'Roboto_regular' }}> {course} </Text>
               <TouchableOpacity style={styles.LogoutButton} onPress={() => { props.logoutUser() }}>
-                <Text style={{ color: 'white', textAlign: 'center' }}> Log Out </Text>
+                <Text style={{ color: 'white', textAlign: 'center', fontFamily: 'Roboto_medium' }}> Log Out </Text>
               </TouchableOpacity>
             </View>
 

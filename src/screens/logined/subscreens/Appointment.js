@@ -6,23 +6,16 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { WebView } from 'react-native-webview';
 import { connect } from 'react-redux';
-import { Icon } from 'react-native-elements';
+import PWithBackHeader from './../../../components/PWithBackHeader';
 
 const AppointmentScreen = (props) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 24, marginHorizontal: 14, marginBottom: 4 }}>
-
-        <Icon
-          name='arrow-back'
-          color='#007AFF'
-          size={28}
-          onPress={() => props.navigation.goBack()}
-        />
-        <Text style={{ fontSize: 32, fontWeight: "bold", marginLeft: 4 }}>Appointment </Text>
+      <View style={{  marginTop: 24, marginHorizontal: 14 }}>
+        <PWithBackHeader title="Appointment" />
       </View>
       <WebView
-        source={{ uri: 'http://comp.sun.edu.ng/#/dashboard?username=1113' }}
+        source={{ uri: 'http://appt.sun.edu.ng/#/appointment?StudentId=' + Number(props.user.studentId) }}
         style={{ paddingTop: 0 }}
       />
     </SafeAreaView>

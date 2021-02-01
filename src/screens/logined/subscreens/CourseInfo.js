@@ -9,22 +9,24 @@ import {
 } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { Icon } from 'react-native-elements';
+import { connect } from 'react-redux'
 import axios from 'axios'
+import PWithBackHeader from './../../../components/PWithBackHeader'
 
 const DataItem = (props) => {
   return (
-    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginBottom: 12 }}>
-      <Text style={{ fontSize: 16, fontWeight: '700' }}>
+    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginBottom: 12, paddingHorizontal: 8 }}>
+      <Text style={{ fontSize: 16, fontWeight: '700', fontFamily: 'Roboto_medium' }}>
         {props.title}
       </Text>
-      <Text style={{ flex: 1, marginLeft: 4 }}>
+      <Text style={{ flex: 1, marginLeft: 4, fontFamily: 'Roboto_regular' }}>
         {props.content}
       </Text>
     </View>
   )
 }
 
-export default CourseInfoScreen = (props) => {
+const CourseInfoScreen = (props) => {
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState();
@@ -35,8 +37,8 @@ export default CourseInfoScreen = (props) => {
 
         await axios({
           method: 'get',
-          url: 'https://api.sun.edu.ng/api/student-detail/1113/studentId',
-          data: { studentId: 1113 }
+          url: 'https://api.sun.edu.ng/api/AcademicProfile/student-credit-information/' + props.user.studentId + '/studentId',
+          data: { studentId: Number(props.user.studentId) }
         })
           .then(response => {
             setData(response.data);
@@ -56,31 +58,20 @@ export default CourseInfoScreen = (props) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.body}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Icon
-            name='arrow-back'
-            color='#007AFF'
-            size={28}
-            onPress={() => props.navigation.goBack()}
-          />
-          <Text style={{ fontSize: 32, fontWeight: "bold", marginLeft: 4 }}>My Data </Text>
-        </View>
-
+        <PWithBackHeader title="Course Info" />
         {isLoading ? (
           <ActivityIndicator size='large' />
         ) : (
             <ScrollView style={{ marginTop: 24 }}>
-              <Image source={{ uri: 'data:image/png;base64,' + data.photo }} style={styles.thumbnail} />
-              <DataItem title='Student ID: ' content={data.studentId} />
-              <DataItem title="Full Name : " content={data.studentName} />
-              <DataItem title="Course: " content={data.course} />
+              <DataItem title='Student Name: ' content={data.studentName} />
               <DataItem title="Level: " content={data.level} />
-              <DataItem title="Nationality: " content={data.nationality} />
-              <DataItem title="Term Name: " content={data.termName} />
-              <DataItem title="Shift: " content={data.shift} />
-              <DataItem title="Student Type: " content={data.studentType} />
-              <DataItem title="School: " content={data.school} />
-              <DataItem title="Department: " content={data.dept} />
+              <DataItem title="CGPA: " content={data.cgpa} />
+              <DataItem title="Faculty: " content={data.facultyName} />
+              <DataItem title="Student Reg No: " content={data.stud_Regno} />
+              <DataItem title="Credit Attended: " content={data.creditAttended} />
+              <DataItem title="Credit Earned: " content={data.creditEarned} />
+              <DataItem title="Total Credit: " content={data.totalCredit} />
+              <DataItem title="Credit to be Completed: " content={data.credittobecompleted} />
             </ScrollView>
           )
         }
@@ -109,3 +100,9 @@ const styles = StyleSheet.create({
     marginBottom: 24
   },
 })
+
+const mapStateToProps = state => ({
+  user: state.userDetails
+})
+
+export default connect(mapStateToProps)(CourseInfoScreen)

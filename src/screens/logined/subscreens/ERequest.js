@@ -6,22 +6,16 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { WebView } from 'react-native-webview';
 import { connect } from 'react-redux';
-import { Icon } from 'react-native-elements';
+import PWithBackHeader from './../../../components/PWithBackHeader';
 
 const ERequestScreen = (props) => {
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 24, marginHorizontal: 14, marginBottom: 4 }}>
-        <Icon
-          name='arrow-back'
-          color='#007AFF'
-          size={28}
-          onPress={() => props.navigation.goBack()}
-        />
-        <Text style={{ fontSize: 32, fontWeight: "bold", marginLeft: 4 }}>E-Request </Text>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ marginTop: 24, marginHorizontal: 14 }}>
+        <PWithBackHeader title="E-Request" />
       </View>
       <WebView
-        source={{ uri: 'http://appt.sun.edu.ng/#/appointment?StudentId=1113'}}
+        source={{ uri: 'http://rqt.sun.edu.ng/#/request?username=' + Number(props.user.studentId) }}
         style={{ paddingTop: 0 }}
       />
     </SafeAreaView>

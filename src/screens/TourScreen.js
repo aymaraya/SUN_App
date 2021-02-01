@@ -28,7 +28,7 @@ export default TourScreen = (props) => {
           </Button>
         </Left>
         <Body>
-          <Title>Aptitude Test</Title>
+          <Title>Virtual Tour</Title>
         </Body>
         <Right />
       </Header>

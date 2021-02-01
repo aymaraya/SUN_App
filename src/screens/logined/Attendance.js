@@ -18,7 +18,7 @@ import { connect } from 'react-redux';
 const AttendanceScreen = (props) => {
   const [isLoading, setLoading] = useState('empty');
   const [attendance, setAttendance] = useState();
-  const [id, setId] = useState(props.user.studentId)
+  
 
   const getAttendance = async () => {
     setLoading('loading')
@@ -27,7 +27,7 @@ const AttendanceScreen = (props) => {
         method: 'post',
         url: 'https://api.sun.edu.ng/api/attendance',
         data: {
-          'studentId': 1113,
+          'studentId': Number(props.user.studentId),
           'from': fromDate,
           'to': toDate
         }
@@ -38,7 +38,7 @@ const AttendanceScreen = (props) => {
           console.log(attendance)
         })
         .catch(err => {
-          alert('nan')
+          alert(err)
           setLoading('empty')
         })
     } catch (error) {

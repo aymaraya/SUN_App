@@ -7,6 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import ScheduleScreen from '../screens/logined/Schedule';
 import AttendanceScreen from '../screens/logined/Attendance';
 import AssessmentScreen from '../screens/logined/Assessment';
+import ResultModal from '../screens/logined/Result';
 import ProfileScreen from '../screens/logined/ProfileScreen';
 import MyDataScreen from '../screens/logined/subscreens/MyData';
 import ERequestScreen from '../screens/logined/subscreens/ERequest';
@@ -24,22 +25,35 @@ const ProfileStack = createStackNavigator();
 const ProfileStackScreen = () => {
   return (
     <ProfileStack.Navigator headerMode="none">
-      <ProfileStack.Screen name="Profile" component={ProfileScreen}/>
-      <ProfileStack.Screen name="My Data" component={MyDataScreen}/>
-      <ProfileStack.Screen name="Course Info" component={CourseInfoScreen}/>
-      <ProfileStack.Screen name="E Request" component={ERequestScreen}/>
-      <ProfileStack.Screen name="CDP Manual" component={CDPManualScreen}/>
-      <ProfileStack.Screen name="Appointment" component={AppointmentScreen}/>
-      <ProfileStack.Screen name="Complaint" component={ComplaintScreen}/>
+      <ProfileStack.Screen name="Profile" component={ProfileScreen} />
+      <ProfileStack.Screen name="My Data" component={MyDataScreen} />
+      <ProfileStack.Screen name="Course Info" component={CourseInfoScreen} />
+      <ProfileStack.Screen name="E Request" component={ERequestScreen} />
+      <ProfileStack.Screen name="CDP Manual" component={CDPManualScreen} />
+      <ProfileStack.Screen name="Appointment" component={AppointmentScreen} />
+      <ProfileStack.Screen name="Complaint" component={ComplaintScreen} />
     </ProfileStack.Navigator>
+  )
+}
+
+const AssessmentStack = createStackNavigator();
+
+const AssessmentStackScreen = () => {
+  return (
+    <AssessmentStack.Navigator
+      initialRouteName="Assessment"
+      headerMode="none">
+        <AssessmentStack.Screen name="Assessment" component={AssessmentScreen} />
+        <AssessmentStack.Screen name="Result" component={ResultModal} />
+    </AssessmentStack.Navigator>
   )
 }
 
 const StudentScreens = () => {
   return (
-    <Tab.Navigator 
+    <Tab.Navigator
       initialRouteName="Profile"
-      screenOptions= {({ route }) => ({
+      screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, size, color }) => {
           let IconComponent = Ionicons;
           let iconName;
@@ -60,10 +74,10 @@ const StudentScreens = () => {
         activeTintColor: 'blue',
         inactiveTintColor: 'gray'
       }}
-      >
+    >
       <Tab.Screen name="Schedule" component={ScheduleScreen} />
       <Tab.Screen name="Attendance" component={AttendanceScreen} />
-      <Tab.Screen name="Assessment" component={AssessmentScreen} />
+      <Tab.Screen name="Assessment" component={AssessmentStackScreen} />
       <Tab.Screen name="Profile" component={ProfileStackScreen} />
     </Tab.Navigator>
   )
