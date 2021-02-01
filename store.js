@@ -27,8 +27,13 @@ export const loginUser = (username, password) => {
 
       })
         .then(response => {
-          dispatch(loginSuccessful(response.data.result.studentDetail))
-          console.log(response.data.result.studentDetail)
+          if (!response.data.result.isAuthenticated) {
+            dispatch(loginFailed('Wrong Details'))
+            alert('Wrong Username or Password, Please try again.')
+          } else {
+            dispatch(loginSuccessful(response.data.result.studentDetail))
+            console.log(response.data.result.studentDetail)
+          }
         }
         )
         .catch(err => {
