@@ -6,12 +6,19 @@ import {
   Text,
   ActivityIndicator,
   Image
-} from 'react-native';
-import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
-import { Icon } from 'react-native-elements';
+} from 'react-native'; 
+import {
+  Container,
+  Header,
+  Left,
+  Title,
+  Icon,
+  Button,
+  Body,
+  Right
+} from 'native-base';
 import { connect } from 'react-redux'
 import axios from 'axios'
-import PWithBackHeader from './../../../components/PWithBackHeader'
 
 const DataItem = (props) => {
   return (
@@ -56,28 +63,36 @@ const CourseInfoScreen = (props) => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.body}>
-        <PWithBackHeader title="Course Info" />
-        {isLoading ? (
-          <ActivityIndicator size='large' />
-        ) : (
-            <ScrollView style={{ marginTop: 24 }}>
-              <DataItem title='Student Name: ' content={data.studentName} />
-              <DataItem title="Level: " content={data.level} />
-              <DataItem title="CGPA: " content={data.cgpa} />
-              <DataItem title="Faculty: " content={data.facultyName} />
-              <DataItem title="Student Reg No: " content={data.stud_Regno} />
-              <DataItem title="Credit Attended: " content={data.creditAttended} />
-              <DataItem title="Credit Earned: " content={data.creditEarned} />
-              <DataItem title="Total Credit: " content={data.totalCredit} />
-              <DataItem title="Credit to be Completed: " content={data.credittobecompleted} />
-            </ScrollView>
-          )
-        }
+    <Container>
+      <Header>
+        <Left>
+          <Button transparent onPress={() => props.navigation.navigate('Profile')}>
+            <Icon name="arrow-back" />
+          </Button>
+        </Left>
+        <Body>
+          <Title> Course Info </Title>
+        </Body>
+        <Right />
+      </Header>
+      {isLoading ? (
+        <ActivityIndicator size='large' />
+      ) : (
+          <ScrollView style={{ marginTop: 24, marginHorizontal: 14 }}>
+            <DataItem title='Student Name: ' content={data.studentName} />
+            <DataItem title="Level: " content={data.level} />
+            <DataItem title="CGPA: " content={data.cgpa} />
+            <DataItem title="Faculty: " content={data.facultyName} />
+            <DataItem title="Student Reg No: " content={data.stud_Regno} />
+            <DataItem title="Credit Attended: " content={data.creditAttended} />
+            <DataItem title="Credit Earned: " content={data.creditEarned} />
+            <DataItem title="Total Credit: " content={data.totalCredit} />
+            <DataItem title="Credit to be Completed: " content={data.credittobecompleted} />
+          </ScrollView>
+        )
+      }
 
-      </ScrollView>
-    </SafeAreaView>
+    </Container>
   )
 }
 

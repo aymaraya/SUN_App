@@ -8,8 +8,12 @@ import {
 } from 'react-native';
 
 import { Button } from 'react-native-elements';
-
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {
+  Container,
+  Header,
+  Title,
+  Body
+} from 'native-base';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import axios from 'axios'
 
@@ -77,10 +81,14 @@ const AttendanceScreen = (props) => {
 
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Container>
+      <Header>
+        <Body>
+          <Title> Attendance</Title>
+        </Body>
+      </Header>
+
       <View style={styles.body}>
-        <Text style={{ fontSize: 32, fontWeight: "bold" }}>My Attendance </Text>
-        <Text style={{ marginTop: 4, color: '#333333' }}>Select "From" and "to" date to fetch Attendance </Text>
         <View style={{ marginTop: 24 }}>
           <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around' }}>
             <Button onPress={showFromDatepicker} title="From" buttonStyle={{paddingHorizontal: 62, backgroundColor: '#A1CAF1'}}/>
@@ -150,7 +158,7 @@ const AttendanceScreen = (props) => {
 
         })()}
       </View>
-    </SafeAreaView>
+    </Container>
   )
 }
 const mapStateToProps = state => ({
@@ -158,13 +166,8 @@ const mapStateToProps = state => ({
 })
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 24,
-    marginHorizontal: 14
-  },
   body: {
-    flex: 1
+    marginHorizontal: 14
   }
 })
 

@@ -1,26 +1,75 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {
-  View,
-  Text,
-} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+  Container,
+  Header,
+  Left,
+  Title,
+  Icon,
+  Button,
+  Body,
+  Right
+} from 'native-base';
 import { WebView } from 'react-native-webview';
 import { connect } from 'react-redux';
-import PWithBackHeader from './../../../components/PWithBackHeader';
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 
-const AppointmentScreen = (props) => {
+const ActivityIndicatorComponent = () => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={{  marginTop: 24, marginHorizontal: 14 }}>
-        <PWithBackHeader title="Appointment" />
-      </View>
-      <WebView
-        source={{ uri: 'http://appt.sun.edu.ng/#/appointment?StudentId=' + Number(props.user.studentId) }}
-        style={{ paddingTop: 0 }}
+    <View style={styles.activityIndicatorStyle}>
+      <ActivityIndicator
+        color="#009688"
+        size="large"
       />
-    </SafeAreaView>
+      <Text style={{ textAlign: 'center' }}> Loading Webview </Text>
+    </View>
   );
 }
+
+
+const AppointmentScreen = (props) => {
+  const [visible, setVisible] = useState(false)
+
+  return (
+    <Container>
+      <Header>
+        <Left>
+          <Button transparent onPress={() => props.navigation.navigate('Profile')}>
+            <Icon name="arrow-back" />
+          </Button>
+        </Left>
+        <Body>
+          <Title> Appointment </Title>
+        </Body>
+        <Right />
+      </Header>
+      <WebView
+        source={{ uri: 'http://appt.sun.edu.ng/#/appointment?StudentId=' + Number(props.user.studentId) }}
+        javaScriptEnabled={true}
+        //For the Cache
+        domStorageEnabled={true}
+        onLoadStart={() => setVisible(true)}
+        onLoad={() => setVisible(false)}
+        style={{ flex: 1 }}
+      />
+      {visible ? <ActivityIndicatorComponent /> : null}
+    </Container>
+  );
+}
+const styles = StyleSheet.create({
+  activityIndicatorStyle: {
+    flex: 1,
+    position: 'absolute',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    justifyContent: 'center',
+  },
+});
 
 const mapStateToProps = state => ({
   user: state.userDetails

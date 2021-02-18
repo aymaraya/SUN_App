@@ -6,8 +6,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import ScheduleScreen from '../screens/logined/Schedule';
 import AttendanceScreen from '../screens/logined/Attendance';
+import ResultScreen from '../screens/logined/MainResult';
 import AssessmentScreen from '../screens/logined/Assessment';
-import ResultModal from '../screens/logined/Result';
+import ResultsScreen from '../screens/logined/Results';
 import ProfileScreen from '../screens/logined/ProfileScreen';
 import MyDataScreen from '../screens/logined/subscreens/MyData';
 import ERequestScreen from '../screens/logined/subscreens/ERequest';
@@ -38,13 +39,15 @@ const ProfileStackScreen = () => {
 
 const AssessmentStack = createStackNavigator();
 
-const AssessmentStackScreen = () => {
+const ResultStackScreen = () => {
   return (
     <AssessmentStack.Navigator
-      initialRouteName="Assessment"
+      initialRouteName="Result"
       headerMode="none">
+        <AssessmentStack.Screen name="Result" component={ResultScreen} />
         <AssessmentStack.Screen name="Assessment" component={AssessmentScreen} />
-        <AssessmentStack.Screen name="Result" component={ResultModal} />
+        <AssessmentStack.Screen name="Results" component={ResultsScreen} />
+
     </AssessmentStack.Navigator>
   )
 }
@@ -61,8 +64,8 @@ const StudentScreens = () => {
             iconName = `ios-calendar`;
           } else if (route.name === 'Attendance') {
             iconName = `ios-checkmark-circle`;
-          } else if (route.name === 'Assessment') {
-            iconName = `ios-notifications`;
+          } else if (route.name === 'Result') {
+            iconName = `ios-list`;
           } else {
             iconName = `md-person`;
           }
@@ -77,7 +80,7 @@ const StudentScreens = () => {
     >
       <Tab.Screen name="Schedule" component={ScheduleScreen} />
       <Tab.Screen name="Attendance" component={AttendanceScreen} />
-      <Tab.Screen name="Assessment" component={AssessmentStackScreen} />
+      <Tab.Screen name="Result" component={ResultStackScreen} />
       <Tab.Screen name="Profile" component={ProfileStackScreen} />
     </Tab.Navigator>
   )

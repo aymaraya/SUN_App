@@ -12,11 +12,11 @@ import { connect } from 'react-redux';
 
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const AssessmentScreen = (props) => {
+const ResultsScreen = (props) => {
   const [isLoading, setLoading] = useState(true);
-  const [courses, setCourses] = useState();
+  const [semesters, setSemesters] = useState();
   const [resultLoading, setResultLoading] = useState(false);
-  const [batchCode, setBatchCode] = useState('');
+  const [Id, setId] = useState('');
   const [courseName, setCourseName] = useState('');
   const [marks, setMarks] = useState();
   const [showMark, setShowMark] = useState(false);
@@ -27,15 +27,14 @@ const AssessmentScreen = (props) => {
       try {
         await axios({
           method: 'get',
-          url: 'https://api.sun.edu.ng/api/assessment-mark/batch-codes/' + props.user.studentId + '/studentId',
+          url: 'https://api.sun.edu.ng/api/result/semester/' + props.user.studentId + '/studentId',
           data: {
             studentId: Number(props.user.studentId)
           }
         })
           .then(response => {
-            setCourses(response.data);
+            setSemesters(response.data);
             setLoading(false);
-            console.log(courses)
           })
           .catch(err => {
             alert(err)
@@ -52,10 +51,10 @@ const AssessmentScreen = (props) => {
       setResultLoading(true)
       await axios({
         method: 'get',
-        url: 'https://api.sun.edu.ng/api/assessment-mark/' + Number(props.user.studentId) + '/studentId/' + batchCode + '/batchCode',
+        url: 'https://api.sun.edu.ng/api/result/' + Number(props.user.studentId) + '/studentId/' + id + 'semesterId',
         data: {
           'studentId': Number(props.user.studentId),
-          'batchCode': batchCode
+          'semesterId': id
         }
       })
         .then(response => {
@@ -79,9 +78,9 @@ const AssessmentScreen = (props) => {
         !showMark ? (
           <ScrollView style={{ margin: 14 }}>
             {
-              courses.map((item, key) => (
-                <TouchableOpacity key={key} style={{ paddingVertical: 12, borderTopWidth: 0.3 }} onPress={() => { setBatchCode(item.batchCode); setCourseName(item.code); showResult(); }}>
-                  <Text> {item.code} </Text>
+              semesters.map((item, key) => (
+                <TouchableOpacity key={key} style={{ paddingVertical: 12, borderTopWidth: 0.3 }} onPress={() => { setId(item.semesterId); showResult(); }}>
+                  <Text> {item.semesterName} </Text>
                 </TouchableOpacity>
               ))
             }
@@ -124,4 +123,4 @@ const styles = StyleSheet.create({
     marginHorizontal: 14
   }
 })
-export default connect(mapStateToProps)(AssessmentScreen)
+export default connect(mapStateToProps)(ResultsScreen)

@@ -7,8 +7,17 @@ import {
   ActivityIndicator,
   Image
 } from 'react-native';
-import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
-import  PWithBackHeader from './../../../components/PWithBackHeader';
+
+import {
+  Container,
+  Header,
+  Left,
+  Title,
+  Icon,
+  Button,
+  Body,
+  Right
+} from 'native-base';
 
 import { connect } from 'react-redux'
 import axios from 'axios'
@@ -57,30 +66,37 @@ const MyDataScreen = (props) => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.body}>
-        <PWithBackHeader title="My Data" />
-        {isLoading ? (
-          <ActivityIndicator size='large' />
-        ) : (
-            <ScrollView style={{ marginTop: 24 }}>
-              <Image source={{ uri: 'data:image/png;base64,' + data.photo }} style={styles.thumbnail} />
-              <DataItem title='Student ID: ' content={data.studentId} />
-              <DataItem title="Full Name : " content={data.studentName} />
-              <DataItem title="Course: " content={data.course} />
-              <DataItem title="Level: " content={data.level} />
-              <DataItem title="Nationality: " content={data.nationality} />
-              <DataItem title="Term Name: " content={data.termName} />
-              <DataItem title="Shift: " content={data.shift} />
-              <DataItem title="Student Type: " content={data.studentType} />
-              <DataItem title="School: " content={data.school} />
-              <DataItem title="Department: " content={data.dept} />
-            </ScrollView>
-          )
-        }
-
-      </ScrollView>
-    </SafeAreaView>
+    <Container>
+      <Header>
+        <Left>
+          <Button transparent onPress={() => props.navigation.navigate('Profile')}>
+            <Icon name="arrow-back" />
+          </Button>
+        </Left>
+        <Body>
+          <Title> My Data</Title>
+        </Body>
+        <Right />
+      </Header>
+      {isLoading ? (
+        <ActivityIndicator size='large' />
+      ) : (
+          <ScrollView style={{ marginTop: 24, marginHorizontal: 14 }}>
+            <Image source={{ uri: 'data:image/png;base64,' + data.photo }} style={styles.thumbnail} />
+            <DataItem title='Student ID: ' content={data.studentId} />
+            <DataItem title="Full Name : " content={data.studentName} />
+            <DataItem title="Course: " content={data.course} />
+            <DataItem title="Level: " content={data.level} />
+            <DataItem title="Nationality: " content={data.nationality} />
+            <DataItem title="Term Name: " content={data.termName} />
+            <DataItem title="Shift: " content={data.shift} />
+            <DataItem title="Student Type: " content={data.studentType} />
+            <DataItem title="School: " content={data.school} />
+            <DataItem title="Department: " content={data.dept} />
+          </ScrollView>
+        )
+      }
+    </Container>
   )
 }
 

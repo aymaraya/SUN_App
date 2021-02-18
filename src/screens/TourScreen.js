@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {
   View,
   StyleSheet,
   Text,
-  TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 
 import { WebView } from 'react-native-webview';
@@ -18,7 +18,22 @@ import {
   Right
 } from 'native-base';
 
+
+const ActivityIndicatorComponent = () => {
+  return (
+    <View style={styles.activityIndicatorStyle}>
+      <ActivityIndicator
+        color="#009688"
+        size="large"
+      />
+      <Text style={{ textAlign: 'center' }}> Loading Webview </Text>
+    </View>
+  );
+}
+
 export default TourScreen = (props) => {
+  const [visible, setVisible] = useState(false)
+
   return (
     <Container>
       <Header>
@@ -34,9 +49,14 @@ export default TourScreen = (props) => {
       </Header>
       <WebView
         source={{ uri: 'https://www.360human.com.ng/tour/skyline-university-entrance-reception-car-park-library-marketing-area-computer-labs-ssd/skinned/' }}
-        style={{ paddingTop: 0 }}
+        javaScriptEnabled={true}
+        //For the Cache
+        domStorageEnabled={true}
+        onLoadStart={() => setVisible(true)}
+        onLoad={() => setVisible(false)} 
+        style={{ flex: 1 }}
       />
-
+      {visible ? <ActivityIndicatorComponent /> : null} 
     </Container>
   );
 }
@@ -44,14 +64,20 @@ export default TourScreen = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    padding: 15
   },
-  titleBar: {
-    backgroundColor: '#eee',
-    paddingTop: 0,
-    paddingLeft: 18,
-    paddingBottom: 5
-  }
+  activityIndicatorStyle: {
+    flex: 1,
+    position: 'absolute',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    justifyContent: 'center',
+  },
 
 });
+

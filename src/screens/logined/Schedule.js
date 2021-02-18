@@ -9,7 +9,12 @@ import {
 import axios from 'axios'
 import { connect } from 'react-redux';
 
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {
+  Container,
+  Header,
+  Title,
+  Body
+} from 'native-base';
 
 const ScheduleScreen = (props) => {
   const [isLoading, setLoading] = useState(true);
@@ -37,45 +42,46 @@ const ScheduleScreen = (props) => {
     getSchedule();
   }, []);
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <View style={styles.container}>
-        <Text style={{ fontSize: 32, fontWeight: "bold" }}>Schedule </Text>
-        <Text style={{ marginTop: 4, color: '#333333' }}>Below is your Weekly Schedule </Text>
-      </View>
+    <Container>
+      <Header>
+        <Body>
+          <Title> Schedule</Title>
+        </Body>
+      </Header>
       { isLoading ? (
         <ActivityIndicator size='large' />
       ) : (
-        <ScrollView style={{ margin: 12 }}>
-          {
-            schedule.map((item, key) => (
-              <View key={key} style={
-                item.day === 'MON' ? styles.mon : item.day === 'TUE' ? styles.tue : item.day === 'WED' ? styles.wed : item.day === 'THU' ? styles.thur : item.day === 'FRI' ? styles.fri : item.day === 'SAT' ? styles.sat : styles.sun
-              }>
-                <Text style={{ fontSize: 16, marginBottom: 5, color: 'white' }}>
-                  {item.day}
-                </Text>
-                <Text style={{ color: '#f6f6f6' }}>
-                  * {item.session1}
-                </Text>
-                <Text style={{ color: '#f6f6f6' }}>
-                  * {item.session2}
-                </Text>
-                <Text style={{ color: '#f6f6f6' }}>
-                  * {item.session3}
-                </Text>
-                <Text style={{ color: '#f6f6f6' }}>
-                  * {item.session4}
-                </Text>
-                <Text style={{ color: '#f6f6f6' }}>
-                  * {item.session5}
-                </Text>
-              </View>
+          <ScrollView style={{ margin: 12 }}>
+            {
+              schedule.map((item, key) => (
+                <View key={key} style={
+                  item.day === 'MON' ? styles.mon : item.day === 'TUE' ? styles.tue : item.day === 'WED' ? styles.wed : item.day === 'THU' ? styles.thur : item.day === 'FRI' ? styles.fri : item.day === 'SAT' ? styles.sat : styles.sun
+                }>
+                  <Text style={{ fontSize: 16, marginBottom: 5, color: 'white' }}>
+                    {item.day}
+                  </Text>
+                  <Text style={{ color: '#f6f6f6' }}>
+                    * {item.session1}
+                  </Text>
+                  <Text style={{ color: '#f6f6f6' }}>
+                    * {item.session2}
+                  </Text>
+                  <Text style={{ color: '#f6f6f6' }}>
+                    * {item.session3}
+                  </Text>
+                  <Text style={{ color: '#f6f6f6' }}>
+                    * {item.session4}
+                  </Text>
+                  <Text style={{ color: '#f6f6f6' }}>
+                    * {item.session5}
+                  </Text>
+                </View>
               ))
             }
           </ScrollView>
         )
       }
-    </SafeAreaView >
+    </Container >
   )
 }
 const mapStateToProps = state => ({

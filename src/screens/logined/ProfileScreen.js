@@ -82,7 +82,12 @@ const ProfileScreen = (props) => {
             iconSrc={require('../../../assets/images/menu/complaint.png')}
             text='Complaint'
             to="Complaint" />
-
+          <Menu
+            color1='#2414ff'
+            color2='#9514ff'
+            iconSrc={require('../../../assets/images/menu/complaint.png')}
+            text='Fees'
+            to="Complaint" />
         </View>
 
       </SafeAreaView>

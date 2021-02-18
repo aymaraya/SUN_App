@@ -7,8 +7,16 @@ import {
   ActivityIndicator
 } from 'react-native';
 
-import { SafeAreaView } from 'react-native-safe-area-context';
-import  PWithBackHeader from './../../../components/PWithBackHeader';
+import {
+  Container,
+  Header,
+  Left,
+  Title,
+  Icon,
+  Button,
+  Body,
+  Right
+} from 'native-base';
 
 import { connect } from 'react-redux'
 import axios from 'axios'
@@ -43,33 +51,41 @@ const CDPManualScreen = (props) => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.body}>
-        <PWithBackHeader title="CDP Manual" />
-        {isLoading ? (
-          <ActivityIndicator size='large' />
-        ) : (
-            <ScrollView style={{ marginTop: 24 }}>
-              {
-                data.map((item, key) => (
-                  <View key={key} style={{
-                    padding: 14, borderTopWidth: 0.3
-                  }}>
-                    <Text style={{ fontFamily: 'Roboto_medium'}}>
-                      {item.employeeName}
-                    </Text>
-                    <Text style={{ fontFamily: 'Roboto_regular'}}>
-                      {item.courseDescription}
-                    </Text>
-                  </View>
-                ))
-              }
-            </ScrollView>
-          )
-        }
+    <Container>
+      <Header>
+        <Left>
+          <Button transparent onPress={() => props.navigation.navigate('Profile')}>
+            <Icon name="arrow-back" />
+          </Button>
+        </Left>
+        <Body>
+          <Title> CDP Manual </Title>
+        </Body>
+        <Right />
+      </Header>
+      {isLoading ? (
+        <ActivityIndicator size='large' />
+      ) : (
+          <ScrollView style={{ marginTop: 24, marginHorizontal: 14 }}>
+            {
+              data.map((item, key) => (
+                <View key={key} style={{
+                  padding: 14, borderTopWidth: 0.3
+                }}>
+                  <Text style={{ fontFamily: 'Roboto_medium' }}>
+                    {item.employeeName}
+                  </Text>
+                  <Text style={{ fontFamily: 'Roboto_regular' }}>
+                    {item.courseDescription}
+                  </Text>
+                </View>
+              ))
+            }
+          </ScrollView>
+        )
+      }
 
-      </ScrollView>
-    </SafeAreaView>
+    </Container>
   )
 }
 

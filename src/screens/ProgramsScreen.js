@@ -1,6 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {
-  StyleSheet
+  StyleSheet,
+  ActivityIndicator,
+  Text,
+  View
 } from 'react-native';
 
 import { WebView } from 'react-native-webview';
@@ -12,17 +15,67 @@ import {
   Tabs,
   Left,
   Title,
+  Content,
   Icon,
   Button,
   Body,
   Right
 } from 'native-base';
 
+const ActivityIndicatorComponent = () => {
+  return (
+    <View style={styles.activityIndicatorStyle}>
+      <ActivityIndicator
+        color="#009688"
+        size="large"
+      />
+      <Text style={{ textAlign: 'center' }}> Loading Webview </Text>
+    </View>
+  );
+}
+
+const Program1 = () => {
+  const [visible, setVisible] = useState(false)
+
+  return (
+    <View style={{ flex: 1 }}>
+      <WebView
+        source={{ uri: 'https://sun.edu.ng/schools/science-information-technology/' }}
+        javaScriptEnabled={true}
+        //For the Cache
+        domStorageEnabled={true}
+        onError={() => alert('Something went wrong')}
+        onLoadStart={() => setVisible(true)}
+        onLoad={() => setVisible(false)} />
+      {visible ? <ActivityIndicatorComponent /> : null}
+    </View>
+  )
+}
+
+const Program2 = () => {
+  const [visible, setVisible] = useState(false)
+
+  return (
+    <View style={{ flex: 1 }}>
+      <WebView
+        source={{ uri: 'https://sun.edu.ng/schools/art-management-science' }}
+        javaScriptEnabled={true}
+        //For the Cache
+        domStorageEnabled={true}
+        onLoadStart={() => setVisible(true)}
+        onError={() => alert('Something went wrong')}
+        onLoad={() => setVisible(false)}
+        style={{ flex: 1 }} />
+      {visible ? <ActivityIndicatorComponent /> : null}
+    </View>
+  )
+}
 
 export default ProgramScreen = (props) => {
+
   return (
     <Container>
-      <Header>
+      <Header hasTabs>
         <Left>
           <Button transparent onPress={() => props.navigation.navigate('Home')}>
             <Icon name="arrow-back" />
@@ -33,17 +86,14 @@ export default ProgramScreen = (props) => {
         </Body>
         <Right />
       </Header>
+
       <Tabs tabBarUnderlineStyle={{ backgroundColor: '#007AFF' }}>
         <Tab heading="Program I"
           tabStyle={{ backgroundColor: '#fff' }}
           textStyle={{ color: 'black' }}
           activeTabStyle={{ backgroundColor: '#fff' }}
           activeTextStyle={{ color: 'black', fontWeight: 'normal' }}>
-
-          <WebView
-            source={{ uri: 'https://sun.edu.ng/schools/science-information-technology/' }}
-            style={{ paddingTop: 0 }}
-          />
+          <Program1 />
         </Tab>
 
         <Tab heading="Program II"
@@ -51,10 +101,7 @@ export default ProgramScreen = (props) => {
           textStyle={{ color: 'black' }}
           activeTabStyle={{ backgroundColor: '#fff' }}
           activeTextStyle={{ color: 'black', fontWeight: 'normal' }}>
-          <WebView
-            source={{ uri: 'https://sun.edu.ng/schools/art-management-science' }}
-            style={{ paddingTop: 0 }}
-          />
+          <Program2 />
         </Tab>
       </Tabs>
 
@@ -68,10 +115,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10
   },
-  titleBar: {
-    backgroundColor: '#eee',
-    paddingTop: 0,
-    paddingLeft: 18,
-    paddingBottom: 5
-  }
+  activityIndicatorStyle: {
+    flex: 1,
+    position: 'absolute',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    justifyContent: 'center',
+  },
 });
