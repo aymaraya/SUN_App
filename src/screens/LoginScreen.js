@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { loginUser } from './../../store';
-import { Button } from 'react-native-elements';
+
 const LoginScreen = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -35,8 +35,10 @@ const LoginScreen = (props) => {
         />
       </View>
       <View style={{ flexDirection: 'column' }}>
-        <Button title="Apply Now" buttonStyle={styles.applyButton}
-          onPress={() => props.navigation.navigate('Admission')} />
+        
+        <TouchableOpacity style={styles.applyButton} onPress={() => props.navigation.navigate('Admission')}>
+          <Text style={{ color: 'white', fontWeight: 'bold', textAlign: 'center' }}> Apply Now </Text>
+        </TouchableOpacity>
       </View>
       <View>
         <View style={[styles.inputContainer, styles.loginInput]}>
@@ -71,18 +73,18 @@ const LoginScreen = (props) => {
         </View>
         {
           props.loading ? (
-            <View style={styles.activityIndicatorContainer}>
-              <ActivityIndicator size="small" color='white'/>
+            <View style={styles.loginButton}>
+              <ActivityIndicator size="small" color='white' />
             </View>
           ) : (
-            <Button title="Login" buttonStyle={styles.loginButton}
-              onPress={handleLoginPress}
-            />
-          )
+              <TouchableOpacity style={styles.loginButton} onPress={handleLoginPress}>
+                <Text style={{ color: 'white', fontWeight: 'bold', textAlign: 'center' }}> Login </Text>
+              </TouchableOpacity>
+            )
         }
         <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 12 }}>
           <Text style={{ fontFamily: 'Roboto_regular' }}>
-            Are you a Visitor? 
+            Are you a Visitor?
             </Text>
           <TouchableOpacity onPress={() => props.navigation.navigate('Home')}>
             <Text style={{ color: '#d55154', marginLeft: 4, fontFamily: 'Roboto_medium' }}>
@@ -131,16 +133,15 @@ const styles = StyleSheet.create({
   loginInput: {
     width: 300
   },
-  statusButton: {
-    backgroundColor: 'black'
-  },
   loginButton: {
     backgroundColor: '#FF9500',
     width: 300,
-    marginTop: 8,
+    marginTop: 15,
+    borderRadius: 6,
+    paddingVertical: 10
   },
-  activityIndicatorContainer: {
-    backgroundColor: '#FF9500',
+  applyButton: {
+    backgroundColor: '#d44045',
     width: 300,
     marginTop: 15,
     borderRadius: 6,
