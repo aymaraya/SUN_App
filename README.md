@@ -1,11 +1,14 @@
 # SUN App
-[SUN App Logo](./assets/appicon.png)
-[SUN Splash Screen](./assets/splash.png)
 Cross-platform App for Skyline University Nigeria
+![SUN App Logo](https://github.com/aymaraya/SUN_App/assets/appicon.png)
+![SUN Splash Screen](https://github.com/aymaraya/SUN_App/assets/splash.png)
+
+
 ## Table of contents
 * [General info](#general-info)
 * [Setup](#setup)
 * [Project Structure](#project-structure)
+
 
 ## General Info
 
@@ -24,6 +27,7 @@ Your environment needs to be set up for the particular platforms that you want t
 * Redux-thunk: 2.3.0
 
 
+
 ## Setup
 
 To run this project, clone this repository and:
@@ -39,12 +43,13 @@ The fastest way to get up and running is to use the Expo Go app on your iOS or A
 You can also run the app directly on your computer. you can learn more about [installing the iOS Simulator (macOS only)](https://docs.expo.io/workflow/ios-simulator/) and [installing an Android emulator](https://docs.expo.io/workflow/android-studio-emulator/).
 
 
+
 ## Project Structure
 
-* (./assets): All the images and fonts used in this project will be found in this folder
-* (./src): This is where you can find components, screens, navigation, redux actions and context.
-* (./) (After npm install): This folder contains all of the different dependencies and packages that we need in this project for it to work so if you install any third-party packages in the future. Those are going to be installed into this node modules folder.
-* (./index.js): is the root component of our app and currently deals with loading fonts and redux wrap.
-* (./App.js): is the actual file that wrap Visitor's screen and Student's screen navigation.
-* (./app.json): this root component contains information about the project, its name, its supported platforms, icon and splash images.
-* (./package.json): is used to track our different dependencies of the project and also some scripts as well so just extra information about the project.
+* [asset folder](assets): All the images and fonts used in this project will be found in this folder
+* [src folder](src): This is where you can find components, screens, navigation, redux actions and context.
+* [npm_modules folder]() (After npm install): This folder contains all of the different dependencies and packages that we need in this project for it to work so if you install any third-party packages in the future. Those are going to be installed into this node modules folder.
+* [index.js file](index.js): is the root component of our app and currently deals with loading fonts and redux wrap.
+* [App.js file](App.js): is the actual file that wrap Visitor's screen and Student's screen navigation.
+* [app.json file](app.json): this root component contains information about the project, its name, its supported platforms, icon and splash images.
+* [package.json file](package.json): is used to track our different dependencies of the project and also some scripts as well so just extra information about the project.
