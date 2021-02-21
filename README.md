@@ -1,5 +1,6 @@
 # SUN App
 [SUN App Logo](./assets/appicon.png)
+[SUN Splash Screen](./assets/splash.png)
 Cross-platform App for Skyline University Nigeria
 ## Table of contents
 * [General info](#general-info)
@@ -40,10 +41,10 @@ You can also run the app directly on your computer. you can learn more about [in
 
 ## Project Structure
 
-* assets folder: All the images and fonts used in this project will be found in this folder
-* src folder: This is where you can find components, screens, navigation, redux actions and context.
-* node_modules folder (After npm install): This folder contains all of the different dependencies and packages that we need in this project for it to work so if you install any third-party packages in the future. Those are going to be installed into this node modules folder.
-* index.js file: is the root component of our app and currently deals with loading fonts and redux wrap.
-* App.js file: is the actual file that wrap Visitor's screen and Student's screen navigation.
-* app.json file: this root component contains information about the project, its name, its supported platforms, icon and splash images.
-* package.json file: is used to track our different dependencies of the project and also some scripts as well so just extra information about the project.
+* (./assets): All the images and fonts used in this project will be found in this folder
+* (./src): This is where you can find components, screens, navigation, redux actions and context.
+* (./) (After npm install): This folder contains all of the different dependencies and packages that we need in this project for it to work so if you install any third-party packages in the future. Those are going to be installed into this node modules folder.
+* (./index.js): is the root component of our app and currently deals with loading fonts and redux wrap.
+* (./App.js): is the actual file that wrap Visitor's screen and Student's screen navigation.
+* (./app.json): this root component contains information about the project, its name, its supported platforms, icon and splash images.
+* (./package.json): is used to track our different dependencies of the project and also some scripts as well so just extra information about the project.
