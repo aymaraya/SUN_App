@@ -9,12 +9,21 @@ import {
 } from 'react-native';
 import axios from 'axios'
 import { connect } from 'react-redux';
-
+import {
+  Container,
+  Header,
+  Left,
+  Title,
+  Icon,
+  Button,
+  Body,
+  Right
+} from 'native-base';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const AssessmentScreen = (props) => {
+const FeeScreen = (props) => {
   const [isLoading, setLoading] = useState(true);
-  const [courses, setCourses] = useState();
+  const [semesters, setSemesters] = useState();
   const [resultLoading, setResultLoading] = useState(false);
   const [batchCode, setBatchCode] = useState('');
   const [courseName, setCourseName] = useState('');
@@ -23,19 +32,19 @@ const AssessmentScreen = (props) => {
 
 
   useEffect(() => {
-    const getCourses = async () => {
+    const getSemesters = async () => {
       try {
         await axios({
           method: 'get',
-          url: 'https://api.sun.edu.ng/api/assessment-mark/batch-codes/' + props.user.studentId + '/studentId',
+          url: 'https://api.sun.edu.ng/api/result/semester/' + props.user.studentId + '/studentId',
           data: {
             studentId: Number(props.user.studentId)
           }
         })
           .then(response => {
-            setCourses(response.data);
+            setSemesters(response.data);
             setLoading(false);
-            console.log(courses)
+            console.log(semesters)
           })
           .catch(err => {
             alert(err)
@@ -44,10 +53,10 @@ const AssessmentScreen = (props) => {
         alert(error)
       }
     };
-    getCourses();
+    getSemesters();
   }, []);
 
-  const showResult = async () => {
+  const showFee = async () => {
     try {
       setResultLoading(true)
       await axios({
@@ -74,12 +83,23 @@ const AssessmentScreen = (props) => {
   };
 
   return (
-    <View>
+    <Container>
+      <Header>
+        <Left>
+          <Button transparent onPress={() => props.navigation.navigate('Profile')}>
+            <Icon name="arrow-back" />
+          </Button>
+        </Left>
+        <Body>
+          <Title> Appointment </Title>
+        </Body>
+        <Right />
+      </Header>
       { !isLoading && !resultLoading ? (
         !showMark ? (
           <ScrollView style={{ margin: 14 }}>
             {
-              courses.map((item, key) => (
+              semesters.map((item, key) => (
                 <TouchableOpacity key={key} style={{ paddingVertical: 12, borderTopWidth: 0.3 }} onPress={() => { setBatchCode(item.batchCode); setCourseName(item.code); showResult(); }}>
                   <Text> {item.code} </Text>
                 </TouchableOpacity>
@@ -87,7 +107,7 @@ const AssessmentScreen = (props) => {
             }
           </ScrollView>
         ) : (
-            <View style={{paddingHorizontal: 14}}>
+            <View style={{ paddingHorizontal: 14 }}>
               <Text style={{ fontSize: 18, fontFamily: 'Roboto_medium', marginVertical: 18, textAlign: 'center' }}> {courseName} </Text>
               <View style={{ paddingVertical: 6, paddingHorizontal: 24, flexDirection: 'row', alignSelf: 'center', borderWidth: 0.5 }}>
                 <Text style={{ flex: 3, fontFamily: 'Roboto_bold', borderRightWidth: 0.3 }}> Assessment Tool </Text>
@@ -100,28 +120,23 @@ const AssessmentScreen = (props) => {
                 </View>
               ))}
 
-              <TouchableOpacity 
-                style={{marginVertical: 24, paddingHorizontal: 14, paddingVertical: 8, backgroundColor: '#ff2929', borderRadius: 6 }}
+              <TouchableOpacity
+                style={{ marginVertical: 24, paddingHorizontal: 14, paddingVertical: 8, backgroundColor: '#ff2929', borderRadius: 6 }}
                 onPress={() => setShowMark(false)}>
-                <Text style={{textAlign: 'center', color: 'white', fontWeight: 'bold'}}> Go back </Text>
+                <Text style={{ textAlign: 'center', color: 'white', fontWeight: 'bold' }}> Go back </Text>
               </TouchableOpacity>
             </View>
           )
       ) :
         (
-          <ActivityIndicator size='large' style={{marginTop: 5}}/>
+          <ActivityIndicator size='large' />
         )
       }
-    </View >
+    </Container >
   )
 }
 const mapStateToProps = state => ({
   user: state.userDetails
 })
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 24,
-    marginHorizontal: 14
-  }
-})
-export default connect(mapStateToProps)(AssessmentScreen)
+
+export default connect(mapStateToProps)(FeeScreen)

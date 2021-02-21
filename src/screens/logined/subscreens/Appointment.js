@@ -29,6 +29,7 @@ const ActivityIndicatorComponent = () => {
 const AppointmentScreen = (props) => {
   const [visible, setVisible] = useState(false)
 
+  
   return (
     <Container>
       <Header>

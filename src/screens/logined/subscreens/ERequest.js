@@ -1,5 +1,4 @@
 import React, { Component, useState } from 'react';
-import { ActivityIndicator } from 'react-native';
 import {
   Container,
   Header,
@@ -12,11 +11,27 @@ import {
 } from 'native-base';
 import { WebView } from 'react-native-webview';
 import { connect } from 'react-redux';
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+
+const ActivityIndicatorComponent = () => {
+  return (
+    <View style={styles.activityIndicatorStyle}>
+      <ActivityIndicator
+        color="#009688"
+        size="large"
+      />
+      <Text style={{ textAlign: 'center' }}> Loading Webview </Text>
+    </View>
+  );
+}
+
+
 
 const ERequestScreen = (props) => {
   const [visible, setVisible] = useState(false)
+
   return (
-    <Container style={{ flex: 1 }}>
+    <Container>
       <Header>
         <Left>
           <Button transparent onPress={() => props.navigation.navigate('Profile')}>
@@ -30,17 +45,32 @@ const ERequestScreen = (props) => {
       </Header>
       <WebView
         source={{ uri: 'http://rqt.sun.edu.ng/#/request?username=' + Number(props.user.studentId) }}
-        style={{ paddingTop: 0 }}
         javaScriptEnabled={true}
         //For the Cache
         domStorageEnabled={true}
         onLoadStart={() => setVisible(true)}
         onLoad={() => setVisible(false)}
+        style={{ flex: 1 }}
       />
-      {visible ? <ActivityIndicator /> : null}
+      {visible ? <ActivityIndicatorComponent /> : null}
     </Container>
   );
 }
+const styles = StyleSheet.create({
+  activityIndicatorStyle: {
+    flex: 1,
+    position: 'absolute',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    justifyContent: 'center',
+  },
+});
 
 const mapStateToProps = state => ({
   user: state.userDetails

@@ -9,6 +9,7 @@ import {
   Body
 } from 'native-base';
 import Assessment from './Assessment';
+import Results from './Results';
 
 const ResultScreen = (props) => {
   return (
@@ -33,7 +34,7 @@ const ResultScreen = (props) => {
           textStyle={{ color: 'black' }}
           activeTabStyle={{ backgroundColor: '#fff' }}
           activeTextStyle={{ color: 'black', fontWeight: 'normal' }}>
-
+          <Results />
         </Tab>
       </Tabs>
     </Container>

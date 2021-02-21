@@ -76,7 +76,7 @@ const CourseInfoScreen = (props) => {
         <Right />
       </Header>
       {isLoading ? (
-        <ActivityIndicator size='large' />
+        <ActivityIndicator size='large' style={{marginTop: 5}}/>
       ) : (
           <ScrollView style={{ marginTop: 24, marginHorizontal: 14 }}>
             <DataItem title='Student Name: ' content={data.studentName} />

@@ -79,7 +79,7 @@ const MyDataScreen = (props) => {
         <Right />
       </Header>
       {isLoading ? (
-        <ActivityIndicator size='large' />
+        <ActivityIndicator size='large' style={{marginTop: 5}}/>
       ) : (
           <ScrollView style={{ marginTop: 24, marginHorizontal: 14 }}>
             <Image source={{ uri: 'data:image/png;base64,' + data.photo }} style={styles.thumbnail} />

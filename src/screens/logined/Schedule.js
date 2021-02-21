@@ -49,7 +49,7 @@ const ScheduleScreen = (props) => {
         </Body>
       </Header>
       { isLoading ? (
-        <ActivityIndicator size='large' />
+        <ActivityIndicator size='large' style={{marginTop: 5}}/>
       ) : (
           <ScrollView style={{ margin: 12 }}>
             {
