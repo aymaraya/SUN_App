@@ -16,6 +16,8 @@ import CDPManualScreen from '../screens/logined/subscreens/CDPManual';
 import CourseInfoScreen from '../screens/logined/subscreens/CourseInfo';
 import AppointmentScreen from '../screens/logined/subscreens/Appointment';
 import ComplaintScreen from '../screens/logined/subscreens/Complaint';
+import FeeScreen from '../screens/logined/subscreens/Fee';
+
 
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -33,6 +35,7 @@ const ProfileStackScreen = () => {
       <ProfileStack.Screen name="CDP Manual" component={CDPManualScreen} />
       <ProfileStack.Screen name="Appointment" component={AppointmentScreen} />
       <ProfileStack.Screen name="Complaint" component={ComplaintScreen} />
+      <ProfileStack.Screen name="Fee" component={FeeScreen} />
     </ProfileStack.Navigator>
   )
 }
@@ -47,7 +50,6 @@ const ResultStackScreen = () => {
         <AssessmentStack.Screen name="Result" component={ResultScreen} />
         <AssessmentStack.Screen name="Assessment" component={AssessmentScreen} />
         <AssessmentStack.Screen name="Results" component={ResultsScreen} />
-
     </AssessmentStack.Navigator>
   )
 }

@@ -91,47 +91,10 @@ const FeeScreen = (props) => {
           </Button>
         </Left>
         <Body>
-          <Title> Appointment </Title>
+          <Title> Fee </Title>
         </Body>
         <Right />
       </Header>
-      { !isLoading && !resultLoading ? (
-        !showMark ? (
-          <ScrollView style={{ margin: 14 }}>
-            {
-              semesters.map((item, key) => (
-                <TouchableOpacity key={key} style={{ paddingVertical: 12, borderTopWidth: 0.3 }} onPress={() => { setBatchCode(item.batchCode); setCourseName(item.code); showResult(); }}>
-                  <Text> {item.code} </Text>
-                </TouchableOpacity>
-              ))
-            }
-          </ScrollView>
-        ) : (
-            <View style={{ paddingHorizontal: 14 }}>
-              <Text style={{ fontSize: 18, fontFamily: 'Roboto_medium', marginVertical: 18, textAlign: 'center' }}> {courseName} </Text>
-              <View style={{ paddingVertical: 6, paddingHorizontal: 24, flexDirection: 'row', alignSelf: 'center', borderWidth: 0.5 }}>
-                <Text style={{ flex: 3, fontFamily: 'Roboto_bold', borderRightWidth: 0.3 }}> Assessment Tool </Text>
-                <Text style={{ flex: 1, textAlign: 'center', fontFamily: 'Roboto_medium' }}> Total </Text>
-              </View>
-              {marks.map((item, key) => (
-                <View key={key} style={{ paddingVertical: 6, paddingHorizontal: 24, flexDirection: 'row', alignSelf: 'center', borderWidth: 0.3 }}>
-                  <Text style={{ flex: 3, fontFamily: 'Roboto_regular', borderRightWidth: 0.3 }}> {item.assessmentTool}  </Text>
-                  <Text style={{ flex: 1, textAlign: 'center', fontFamily: 'Roboto_regular' }}> {item.totol} </Text>
-                </View>
-              ))}
-
-              <TouchableOpacity
-                style={{ marginVertical: 24, paddingHorizontal: 14, paddingVertical: 8, backgroundColor: '#ff2929', borderRadius: 6 }}
-                onPress={() => setShowMark(false)}>
-                <Text style={{ textAlign: 'center', color: 'white', fontWeight: 'bold' }}> Go back </Text>
-              </TouchableOpacity>
-            </View>
-          )
-      ) :
-        (
-          <ActivityIndicator size='large' />
-        )
-      }
     </Container >
   )
 }
