@@ -13,18 +13,6 @@ const IC_ARR_UP = require('./icons/ic_arr_up.png');
 
 export default Requirements = () => {
 
-  state = {
-    contents: [
-      {
-        title: 'Admission Requirements',
-        body: 'Eligibility for admission into Skyline University Nigeria is open to all candidates who possess the required qualification irrespective of race, sex, creed, religion, geographical location and ethnic background or tribe. The admission requirements for entry into undergraduate academic programs are as detailed in subsequent paragraphs. Following are the compulsory requirements for admission into institutions in Nigeria, Candidate must possess five (5) credits in O/Level or its equivalent as required by the Department of interest. Candidates must obtain a minimum of 180 points in Unified Tertiary Matriculation Examination (UTME) and Candidate’s details must have been forwarded to SUN by Joint Admissions and Matriculation Board (JAMB). Admission into full-time undergraduate programs is ONLY gained through Unified Tertiary Matriculation Examination (UTME) and Direct Entry (DE).',
-      },
-      {
-        title: 'Rules',
-        body: 'Eligibility for admission into Skyline University Nigeria is open to all candidates who possess the required qualification irrespective of race, sex, creed, religion, geographical location and ethnic background or tribe. The admission requirements for entry into undergraduate academic programs are as detailed in subsequent paragraphs. Following are the compulsory requirements for admission into institutions in Nigeria, Candidate must possess five (5) credits in O/Level or its equivalent as required by the Department of interest. Candidates must obtain a minimum of 180 points in Unified Tertiary Matriculation Examination (UTME) and Candidate’s details must have been forwarded to SUN by Joint Admissions and Matriculation Board (JAMB). Admission into full-time undergraduate programs is ONLY gained through Unified Tertiary Matriculation Examination (UTME) and Direct Entry (DE).',
-      }
-    ],
-  };
 
   return (
     <View style={styles.container}>

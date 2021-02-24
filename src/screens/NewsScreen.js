@@ -32,7 +32,7 @@ const ActivityIndicatorComponent = () => {
 }
 
 export default NewsScreen = (props) => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(true)
 
   return (
     <Container>
@@ -52,7 +52,6 @@ export default NewsScreen = (props) => {
         javaScriptEnabled={true}
         //For the Cache
         domStorageEnabled={true}
-        onLoadStart={() => setVisible(true)}
         onLoad={() => setVisible(false)} 
         style={{ flex: 1 }}
       />

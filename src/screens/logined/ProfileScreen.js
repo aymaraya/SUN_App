@@ -5,14 +5,14 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  ActivityIndicator
+  ScrollView
 } from 'react-native';
 import { connect } from 'react-redux';
 
 import { logoutUser } from './../../../store';
 
 import Menu from './../../components/Menu';
-import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const ProfileScreen = (props) => {
@@ -22,28 +22,74 @@ const ProfileScreen = (props) => {
   const name = props.user.studentName;
   const course = props.user.course;
 
+  const [screens, setScreens] = useState([
+    {
+      'color1': '#01dd9b',
+      'color2': '#14bb9d',
+      'iconSrc': '"../../../assets/images/menu/data.png"',
+      'text': 'My Data',
+      'to': 'My Data'
+    },
+    {
+      'color1': '#25446c',
+      'color2': '#003067',
+      'iconSrc': '"../../../assets/images/menu/course.png"',
+      'text': 'Course Info',
+      'to': 'Course Info'
+    },
+    {
+      'color1': '#00c4c6',
+      'color2': '#069ec3',
+      'iconSrc': '"../../../assets/images/menu/request.png"',
+      'text': 'E-request',
+      'to': 'E Request'
+    },
+    {
+      'color1': '#8057fc',
+      'color2': '#5d4fed',
+      'iconSrc': '"../../../assets/images/menu/appointment.png"',
+      'text': 'Appointment',
+      'to': 'Appointment'
+    },
+    {
+      'color1': '#ff8c00',
+      'color2': '#911f00',
+      'iconSrc': '"../../../assets/images/menu/complaint.png"',
+      'text': 'Complaint',
+      'to': 'Complaint'
+    },
+    {
+      'color1': '#2414ff',
+      'color2': '#9514ff',
+      'iconSrc': '"../../../assets/images/menu/programs.png"',
+      'text': 'Fee',
+      'to': 'Fee'
+    },
+  ])
+
   return (
-    <SafeAreaProvider>
 
-      <SafeAreaView style={styles.container}>
-        <View style={{ backgroundColor: '#d55154', padding: 30 }}>
+    <SafeAreaView style={styles.container}>
+      <View style={{ backgroundColor: '#d55154', padding: 18 }}>
 
-          <View style={styles.profileContainer}>
+        <View style={styles.profileContainer}>
 
-            <Image source={{ uri: photo }} style={styles.thumbnail} />
+          <Image source={{ uri: photo }} style={styles.thumbnail} />
 
-            <View style={styles.detailsContainer}>
-              <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white', textAlign: 'center', fontFamily: 'Roboto_medium' }}> {name} </Text>
-              <Text style={{ fontSize: 14, color: 'white', textAlign: 'center', fontFamily: 'Roboto_regular' }}> {course} </Text>
-              <TouchableOpacity style={styles.LogoutButton} onPress={() => { props.logoutUser() }}>
-                <Text style={{ color: 'white', textAlign: 'center', fontFamily: 'Roboto_medium' }}> Log Out </Text>
-              </TouchableOpacity>
-            </View>
-
+          <View style={styles.detailsContainer}>
+            <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white', textAlign: 'center', fontFamily: 'Roboto_medium' }}> {name} </Text>
+            <Text style={{ fontSize: 14, color: 'white', textAlign: 'center', fontFamily: 'Roboto_regular' }}> {course} </Text>
+            <TouchableOpacity style={styles.LogoutButton} onPress={() => { props.logoutUser() }}>
+              <Text style={{ color: 'white', textAlign: 'center', fontFamily: 'Roboto_medium' }}> Log Out </Text>
+            </TouchableOpacity>
           </View>
 
         </View>
-        <View style={styles.menuContainer}>
+
+      </View>
+
+      <ScrollView style={{paddingHorizontal: 14, marginTop: 14}}>
+        <View style={styles.menus}>
           <Menu
             color1='#01dd9b'
             color2='#14bb9d'
@@ -56,6 +102,8 @@ const ProfileScreen = (props) => {
             iconSrc={require('../../../assets/images/menu/course.png')}
             text='Course Info'
             to="Course Info" />
+        </View>
+        <View style={styles.menus}>
           <Menu
             color1='#00c4c6'
             color2='#069ec3'
@@ -66,9 +114,10 @@ const ProfileScreen = (props) => {
             color1='#8057fc'
             color2='#5d4fed'
             iconSrc={require('../../../assets/images/menu/manual.png')}
-            text='CDP Manual'
+            text='Faculty'
             to="CDP Manual" />
-
+        </View>
+        <View  style={styles.menus}>
           <Menu
             color1='#0a4f3c'
             color2='#4f0a40'
@@ -82,20 +131,23 @@ const ProfileScreen = (props) => {
             iconSrc={require('../../../assets/images/menu/complaint.png')}
             text='Complaint'
             to="Complaint" />
+        </View>
+        <View style={styles.menus}>
           <Menu
             color1='#2414ff'
             color2='#9514ff'
-            iconSrc={require('../../../assets/images/menu/complaint.png')}
+            iconSrc={require('../../../assets/images/menu/programs.png')}
             text='Fee'
             to="Fee" />
           <Menu
-            color1='#fffff'
-            color2='#fffff'
-            />
+            color1='rgba(255, 165, 0, 0)'
+            color2='rgba(255, 165, 0, 0)'
+            to="Profile"
+          />
         </View>
+      </ScrollView>
 
-      </SafeAreaView>
-    </SafeAreaProvider>
+    </SafeAreaView>
   )
 }
 
@@ -116,7 +168,6 @@ const styles = StyleSheet.create({
 
   profileContainer: {
     flexDirection: 'column',
-    padding: 15,
     alignItems: 'center'
   },
   detailsContainer: {
@@ -124,17 +175,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   thumbnail: {
-    width: 144,
-    height: 144,
+    width: 120,
+    height: 120,
     resizeMode: 'cover',
     borderRadius: 90
   },
-  menuContainer: {
+  menus: {
     flex: 1,
-    padding: 16,
     flexDirection: 'row',
-    flexWrap: "wrap",
-    alignContent: 'flex-start',
+    justifyContent: 'space-around',
   },
   LogoutButton: {
     marginTop: 8,

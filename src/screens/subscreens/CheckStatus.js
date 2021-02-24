@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import {
   View,
   StyleSheet,
-  Text
+  Text,
+  TouchableOpacity
 } from 'react-native';
-import { Button } from 'react-native-elements'
-export default CheckStatus = ({navigation}) => {
+
+export default CheckStatus = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.statusText}>
@@ -14,10 +15,9 @@ export default CheckStatus = ({navigation}) => {
         advisor will contact you shortly
         Application reference number: 128870
         </Text>
-      <Button
-        title="Go back to Login"
-        buttonStyle={styles.backButton}
-        onPress={() => navigation.navigate('Login')} />
+      <TouchableOpacity style={styles.applyButton} onPress={handleLoginPress}>
+        <Text style={{ color: 'white', fontWeight: 'bold', textAlign: 'center' }}> Back </Text>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -33,6 +33,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 25,
     fontWeight: 'bold'
+  },
+  applyButton: {
+    backgroundColor: '#d44045',
+    width: 300,
+    marginTop: 15,
+    borderRadius: 6,
+    paddingVertical: 10
   },
   backButton: {
     marginTop: 10

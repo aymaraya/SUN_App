@@ -35,7 +35,7 @@ const ActivityIndicatorComponent = () => {
 }
 
 const Program1 = () => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(true)
 
   return (
     <View style={{ flex: 1 }}>
@@ -45,7 +45,6 @@ const Program1 = () => {
         //For the Cache
         domStorageEnabled={true}
         onError={() => alert('Something went wrong')}
-        onLoadStart={() => setVisible(true)}
         onLoad={() => setVisible(false)} />
       {visible ? <ActivityIndicatorComponent /> : null}
     </View>

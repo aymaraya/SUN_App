@@ -27,7 +27,7 @@ const ActivityIndicatorComponent = () => {
 
 
 const AppointmentScreen = (props) => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(true)
 
   
   return (
@@ -48,7 +48,6 @@ const AppointmentScreen = (props) => {
         javaScriptEnabled={true}
         //For the Cache
         domStorageEnabled={true}
-        onLoadStart={() => setVisible(true)}
         onLoad={() => setVisible(false)}
         style={{ flex: 1 }}
       />

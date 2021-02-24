@@ -27,7 +27,7 @@ const ActivityIndicatorComponent = () => {
 }
 
 const ComplaintScreen = (props) => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(true)
 
   return (
     <Container>
@@ -47,7 +47,6 @@ const ComplaintScreen = (props) => {
         javaScriptEnabled={true}
         //For the Cache
         domStorageEnabled={true}
-        onLoadStart={() => setVisible(true)}
         onLoad={() => setVisible(false)}
         style={{ flex: 1}}
       />

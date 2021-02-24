@@ -4,17 +4,14 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  Image,
-  Dimensions
+  Image
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 
 import { LinearGradient } from 'expo-linear-gradient';
 
-const Menu = ({ color1, color2, iconSrc, text, to }) => {
+const HomeMenu = ({color1, color2, iconSrc, text,  to}) => {
   const navigation = useNavigation();
-  
-
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigation.navigate(to)}>
@@ -39,23 +36,28 @@ const Menu = ({ color1, color2, iconSrc, text, to }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    margin: 6,
-  },
-  text: {
-    color: 'white',
-    textAlign: 'right',
-    marginTop: 8
-  },
-  bg: {
-    borderRadius: 8,
-    padding: 15,
-    justifyContent: 'center',
+    flexGrow: 1,
+    flexShrink: 1,
+    width: '40%',
+    height: '23%',
+    margin: 8
   },
   menuIcon: {
-    height: 120,
-    width: 120
+    height: '80%',
+    width: '60%'
+  },
+  text: { 
+    color: 'white', 
+    textAlign: 'right',
+    marginTop: 8 
+  },
+  bg: {
+    borderRadius: 8, 
+    padding: 15,
+    width: '100%', 
+    height: '100%',
+    justifyContent: 'center',
   }
 });
 
-export default Menu;
+export default (HomeMenu);

@@ -28,7 +28,7 @@ const ActivityIndicatorComponent = () => {
 
 
 const ERequestScreen = (props) => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(true)
 
   return (
     <Container>
@@ -48,7 +48,6 @@ const ERequestScreen = (props) => {
         javaScriptEnabled={true}
         //For the Cache
         domStorageEnabled={true}
-        onLoadStart={() => setVisible(true)}
         onLoad={() => setVisible(false)}
         style={{ flex: 1 }}
       />

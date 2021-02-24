@@ -52,7 +52,7 @@ const ResultsScreen = (props) => {
       setResultLoading(true)
       await axios({
         method: 'get',
-        url: 'https://api.sun.edu.ng/api/result' + Number(props.user.studentId) + '/studentId/' + Id + 'semesterId',
+        url: 'https://api.sun.edu.ng/api/result/' + Number(props.user.studentId) + '/studentId/' + Id + '/semesterId',
         data: {
           'studentId': Number(props.user.studentId),
           'semesterId': Id

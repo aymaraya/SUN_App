@@ -3,16 +3,19 @@ import {
   View,
   StyleSheet,
   ScrollView,
-  Text,
   ActivityIndicator,
 } from 'react-native';
+import Moment from 'moment';
 
-import { Button } from 'react-native-elements';
+
 import {
   Container,
   Header,
   Title,
-  Body
+  Content,
+  Body,
+  Text,
+  Button
 } from 'native-base';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import axios from 'axios'
@@ -22,7 +25,7 @@ import { connect } from 'react-redux';
 const AttendanceScreen = (props) => {
   const [isLoading, setLoading] = useState('empty');
   const [attendance, setAttendance] = useState();
-  
+
 
   const getAttendance = async () => {
     setLoading('loading')
@@ -56,7 +59,7 @@ const AttendanceScreen = (props) => {
   const [toDate, setToDate] = useState(new Date());
   const [showFrom, setShowFrom] = useState(false);
   const [showTo, setShowTo] = useState(false);
-
+  Moment.locale('en');
 
 
   const onChangeFrom = (event, selectedDate) => {
@@ -79,7 +82,6 @@ const AttendanceScreen = (props) => {
     setShowTo(true);
   };
 
-
   return (
     <Container>
       <Header>
@@ -88,15 +90,21 @@ const AttendanceScreen = (props) => {
         </Body>
       </Header>
 
-      <View style={styles.body}>
+      <Content style={styles.body}>
         <View style={{ marginTop: 24 }}>
           <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around' }}>
-            <Button onPress={showFromDatepicker} title="From" buttonStyle={{paddingHorizontal: 62, backgroundColor: '#A1CAF1'}}/>
-            <Button onPress={showToDatepicker} title="To" buttonStyle={{paddingHorizontal: 62, backgroundColor: '#A1CAF1'}} />
+            <Button onPress={showFromDatepicker} small light style={{ width: '48%' }}>
+              <Text>From: {Moment(fromDate).format('DD/MM/yyyy')}</Text> 
+            </Button>
+            <Button onPress={showToDatepicker} small light style={{ width: '48%' }}>
+              <Text>To: {Moment(toDate).format('DD/MM/yyyy')}</Text>
+            </Button>
           </View>
-
-          <View style={{ marginTop: 8 }}>
-            <Button onPress={getAttendance} title="FETCH ATTENDANCE" buttonStyle={{backgroundColor: '#007FFF'}}/>
+          
+          <View style={{ marginTop: 8, alignItems: 'center' }}>
+            <Button onPress={getAttendance} style={{ width: '100%', backgroundColor: '#004987', justifyContent: 'center' }}>
+              <Text style={{ textAlign: 'center' }}>Fetch Attendance</Text>
+            </Button>
           </View>
 
           {showFrom && (
@@ -120,6 +128,7 @@ const AttendanceScreen = (props) => {
           )}
         </View>
 
+        
         {(() => {
           if (isLoading === 'empty') {
             return (
@@ -142,10 +151,10 @@ const AttendanceScreen = (props) => {
                       <Text style={{ fontSize: 16, marginBottom: 5, color: 'white' }}>
                         {item.cdD_Description}
                       </Text>
-                      <Text style={{ color: '#f6f6f6' }}>
+                      <Text style={{ fontSize: 13, color: '#f6f6f6' }}>
                         {item.empName}
                       </Text>
-                      <Text style={{ color: '#f6f6f6' }}>
+                      <Text style={{ fontSize: 13, color: '#f6f6f6' }}>
                         From: {item.from} To: {item.to}
                       </Text>
 
@@ -157,7 +166,7 @@ const AttendanceScreen = (props) => {
           }
 
         })()}
-      </View>
+      </Content>
     </Container>
   )
 }

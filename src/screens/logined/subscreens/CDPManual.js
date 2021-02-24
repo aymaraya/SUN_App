@@ -59,7 +59,7 @@ const CDPManualScreen = (props) => {
           </Button>
         </Left>
         <Body>
-          <Title> CDP Manual </Title>
+          <Title> Faculty </Title>
         </Body>
         <Right />
       </Header>

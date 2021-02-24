@@ -32,7 +32,7 @@ const ActivityIndicatorComponent = () => {
 }
 
 export default TourScreen = (props) => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(true)
 
   return (
     <Container>
@@ -52,7 +52,6 @@ export default TourScreen = (props) => {
         javaScriptEnabled={true}
         //For the Cache
         domStorageEnabled={true}
-        onLoadStart={() => setVisible(true)}
         onLoad={() => setVisible(false)} 
         style={{ flex: 1 }}
       />

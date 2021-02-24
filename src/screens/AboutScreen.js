@@ -32,7 +32,7 @@ const ActivityIndicatorComponent = () => {
 }
 
 export default AboutScreen = (props) => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(true)
 
   return (
     <Container>
@@ -53,7 +53,6 @@ export default AboutScreen = (props) => {
         //For the Cache
         domStorageEnabled={true}
         onError={() => alert('Something went wrong')}
-        onLoadStart={() => setVisible(true)}
         onLoad={() => setVisible(false)}
         />
       {visible ? <ActivityIndicatorComponent /> : null} 
